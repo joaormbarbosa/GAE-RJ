@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Painel do Usuário{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Bem-vindo, {{ usuario.username }}!</h2>
+
+    {% if usuario.administracao %}
+        <p>Administração: <strong>{{ usuario.administracao.nome }}</strong></p>
+        <p>Regional: <strong>{{ usuario.administracao.regional.nome }}</strong></p>
+        <p>Estado: <strong>{{ usuario.administracao.regional.estado.nome }}</strong></p>
+    {% else %}
+        <p>Você ainda não está vinculado a nenhuma administração.</p>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'logout' %}">Sair</a>
+</div>
+{% endblock %}

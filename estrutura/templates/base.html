@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sistema Administrativo{% endblock %}</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            background-color: #F5F7FA;
+            margin: 0;
+            padding: 0;
+            color: #201E1E;
+        }
+
+        header {
+            background-color: #033D60;
+            color: white;
+            padding: 1rem 2rem;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        a {
+            color: #033D60;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #CDD4DC;
+            border-radius: 6px;
+            padding: 1.5rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        button {
+            background-color: #033D60;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #022d49;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sistema Administrativo - CCB</h1>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>
