@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Aviso de Sigilo{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align: center;">
+    <h2>🔒 Termo de Confidencialidade</h2>
+    <p style="font-size: 1.1rem; text-align: justify; margin: 2rem 0;">
+        As informações contidas neste relatório são estritamente confidenciais e devem ser mantidas sob sigilo. 
+        O uso destas informações é restrito às Reuniões Administrativas da Congregação Cristã no Brasil, e sua divulgação 
+        por qualquer meio de comunicação ou a terceiros é expressamente proibida.
+    </p>
+
+    <form method="post" action="{% url 'bi_dashboard' %}">
+        {% csrf_token %}
+        <button type="submit">CONFIRMAR SIGILO E CONTINUAR</button>
+    </form>
+</div>
+{% endblock %}

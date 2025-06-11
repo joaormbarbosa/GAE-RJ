@@ -5,6 +5,14 @@
 {% block content %}
 <div class="card">
     <h2>Bem-vindo, {{ usuario.username }}!</h2>
+    <div class="card">
+    <h2>Dashboard de Indicadores</h2>
+    <iframe title="Indicadores Regionais - Power BI" width="100%" height="600"
+        src="https://app.powerbi.com/view?r=eyJrIjoiZjYxMDQ3YWItZmE2YS00OTdhLTlmYTYtM2E5ODBjMWQ1YjMyIiwidCI6ImNmMzE3Y2ViLTA1M2EtNDYyMy04Y2RmLWU4NWM1NjgxNTdmOCJ9&pageName=4e5032f6e3956f37f488"
+        frameborder="0" allowfullscreen="true">
+    </iframe>
+</div>
+
 
     {% if usuario.administracao %}
         <p>Administração: <strong>{{ usuario.administracao.nome }}</strong></p>
