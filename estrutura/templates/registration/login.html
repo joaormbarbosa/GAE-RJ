@@ -1,10 +1,16 @@
 {% extends "base.html" %}
+{% block title %}Login - GAE-RJ{% endblock %}
+
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Entrar</button>
-  </form>
-  <p><a href="{% url 'password_reset' %}">Esqueci minha senha</a></p>
+  <div class="card">
+    <h2 style="margin-top: 0;">Login</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Entrar</button>
+    </form>
+    <p style="margin-top: 1rem;">
+      <a href="{% url 'password_reset' %}">Esqueceu sua senha?</a>
+    </p>
+  </div>
 {% endblock %}
