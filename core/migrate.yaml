@@ -1,0 +1,16 @@
+type: job
+name: run-migrate
+env: python
+plan: free
+buildCommand: "pip install -r requirements.txt"
+startCommand: "python manage.py migrate"
+branch: main
+envVars:
+  - key: SECRET_KEY
+    sync: false
+  - key: joao.rafael
+    sync: false
+  - key: DEBUG
+    sync: false
+  - key: ALLOWED_HOSTS
+    sync: false
