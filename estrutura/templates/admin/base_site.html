@@ -1,9 +1,14 @@
 {% extends "admin/base.html" %}
-{% load static %}
+{% load i18n %}
+
+{% block title %}GAE-RJ — Administração do Sistema{% endblock %}
 
 {% block branding %}
-  <h1 id="site-name">
-    <img src="{% static 'logo_gae_rj.png' %}" alt="Logo" style="height: 40px; vertical-align: middle;">
-    GAE-RJ — Administração do Sistema
-  </h1>
+  <h1 id="site-name">{% trans "GAE-RJ — Administração do Sistema" %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin.css' %}">
 {% endblock %}

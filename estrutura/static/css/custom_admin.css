@@ -1,0 +1,14 @@
+/* Deixe o fundo mais claro */
+body {
+    background-color: #f5f7fa;
+    font-family: 'Verdana', sans-serif;
+}
+
+/* Cores nos títulos e botões */
+.module h2, .module caption, .inline-group h2 {
+    color: #033d60;
+}
+
+a {
+    color: #033d60;
+}
