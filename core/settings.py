@@ -2,6 +2,7 @@
 from pathlib import Path
 import os
 import dj_database_url
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'chave-padrao-secreta-para-desenvolvimento')
@@ -51,7 +52,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
+        default='sqlite:///db.sqlite3',  # fallback local
+        conn_max_age=600,
+        conn_health_checks=True,
     )
 }
 

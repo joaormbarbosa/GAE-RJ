@@ -6,8 +6,10 @@ services:
       pip install -r requirements.txt
     startCommand: |
       python manage.py migrate &&
-      echo "from estrutura.models import Usuario; Usuario.objects.filter(username='joao.rafael').exists() or Usuario.objects.create_superuser('joao.rafael', 'admin@email.com', 'Zetraxa4@#')" | python manage.py shell &&
+      python manage.py shell < create_superuser.py &&
       gunicorn core.wsgi:application
     envVars:
       - key: SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
         sync: false
