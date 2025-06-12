@@ -1,4 +1,5 @@
 {% extends "admin/base.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block title %}GAE-RJ — Administração do Sistema{% endblock %}
@@ -10,5 +11,5 @@
 {% block nav-global %}{% endblock %}
 
 {% block extrastyle %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin.css' %}">
 {% endblock %}
