@@ -1,8 +1,13 @@
+
+import os
 from estrutura.models import Usuario
 
-if not Usuario.objects.filter(username='joao.rafael').exists():
+senha = os.environ.get('SUPERUSER_PASSWORD')
+
+if senha and not Usuario.objects.filter(username='admin').exists():
     Usuario.objects.create_superuser(
-        username='joao.rafael',
+        username='admin',
         email='joao.rafael@rio.congregacao.org.br',
-        password='Zetraxa4@#'
+        password=senha
+
     )
