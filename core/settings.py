@@ -51,11 +51,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',  # fallback local
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    'default': dj_database_url.config(conn_max_age=1200)
 }
 
 AUTH_PASSWORD_VALIDATORS = [
