@@ -1,6 +1,6 @@
-# estrutura/urls.py
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    # suas rotas de views aqui futuramente
+    path('', views.home, name='home'),
 ]

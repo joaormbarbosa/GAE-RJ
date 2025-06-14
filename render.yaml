@@ -9,7 +9,11 @@ services:
       python manage.py shell < core/create_superuser.py &&
       gunicorn core.wsgi:application
     envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: core.settings
       - key: SECRET_KEY
         sync: false
       - key: SUPERUSER_PASSWORD
+        sync: false
+      - key: DATABASE_URL
         sync: false
