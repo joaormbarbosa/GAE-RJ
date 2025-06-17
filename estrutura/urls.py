@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import mapas_regionais
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -7,4 +9,6 @@ urlpatterns = [
     path('checklist/', views.checklist_geral, name='checklist_geral'),
     path('bi/', views.bi_dashboard, name='bi_dashboard'),
     path('auditoria-log/', views.auditoria_log, name='auditoria_log'),
+    path('mapas-regionais/', mapas_regionais, name='mapas_regionais'),
+
 ]

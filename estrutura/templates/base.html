@@ -40,6 +40,22 @@
             font-size: 0.9rem;
         }
 
+        nav {
+            background-color: #E6EDF4;
+            padding: 0.5rem 2rem;
+        }
+
+        nav a {
+            margin-right: 1.5rem;
+            color: #033D60;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
         main {
             padding: 2rem;
         }
@@ -84,7 +100,9 @@
 <body>
 
 <header>
-   
+    <div class="logo-title">
+        <strong>GAE-RJ</strong>
+    </div>
     <div class="auth-links">
         <a href="{% url 'home' %}">🏠 Início</a>
         {% if user.is_authenticated %}
@@ -95,6 +113,12 @@
         {% endif %}
     </div>
 </header>
+
+<!-- NOVO MENU -->
+<nav>
+    <a href="{% url 'home' %}">🏠 Início</a>
+    <a href="{% url 'mapas_regionais' %}">🗺️ Mapas Regionais</a>
+</nav>
 
 <main>
     {% block content %}{% endblock %}

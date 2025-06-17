@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Mapas Regionais</h1>
+
+  <div class="row">
+    {% for mapa in mapas %}
+    <div class="col-md-4 mb-3">
+      <form method="get">
+        <input type="hidden" name="mapa" value="{{ mapa.url }}">
+        <button type="submit" class="btn btn-primary btn-block">{{ mapa.nome }}</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if mapa_selecionado %}
+  <div class="mt-5">
+    <h3>{{ mapa_nome }}</h3>
+    <iframe src="{{ mapa_selecionado }}" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
