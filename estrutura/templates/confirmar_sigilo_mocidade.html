@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Aviso de Sigilo - Mocidade{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align: center;">
+    <h2>🔒 Termo de Confidencialidade - Mocidade</h2>
+    <p style="font-size: 1.1rem; text-align: justify; margin: 2rem 0;">
+        As informações deste painel de indicadores da mocidade são de uso interno e sigiloso da Congregação Cristã no Brasil.  
+        É terminantemente proibida a reprodução, gravação, transmissão ou divulgação a terceiros.
+        O acesso a este conteúdo implica na aceitação integral deste termo.
+    </p>
+
+    <form method="post" action="{% url 'bi_dashboard_mocidade' %}">
+        {% csrf_token %}
+        <button type="submit">CONFIRMAR E ACESSAR PAINEL MOCIDADE</button>
+    </form>
+</div>
+{% endblock %}

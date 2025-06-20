@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Aviso de Sigilo - Musical{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align: center;">
+    <h2>🔒 Termo de Confidencialidade - Musical</h2>
+    <p style="font-size: 1.1rem; text-align: justify; margin: 2rem 0;">
+        As informações deste painel de indicadores do departamento musical são de uso exclusivo da Congregação Cristã no Brasil.
+        É vedada sua reprodução, divulgação, gravação ou compartilhamento por qualquer meio.  
+        Seu uso está restrito à análise administrativa interna.
+    </p>
+
+    <form method="post" action="{% url 'bi_dashboard_musical' %}">
+        {% csrf_token %}
+        <button type="submit">CONFIRMAR E ACESSAR PAINEL MUSICAL</button>
+    </form>
+</div>
+{% endblock %}

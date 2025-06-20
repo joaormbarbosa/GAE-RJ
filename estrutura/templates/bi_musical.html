@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Musical{% endblock %}
+
+{% block content %}
+<style>
+    .watermark {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 1;
+        font-size: 1.5rem;
+        color: #666666;
+    }
+
+    .watermark span {
+        position: absolute;
+        white-space: nowrap;
+        opacity: 0.12;
+        transform: rotate(-30deg);
+        user-select: none;
+    }
+</style>
+
+<div class="watermark">
+    {% for i in "12345678"|make_list %}
+        {% for j in "12345678"|make_list %}
+            <span style="top: {{ forloop.parentloop.counter0|add:1 }}0vh; left: {{ forloop.counter0|add:1 }}0vw;">
+                {{ username }}
+            </span>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+<h2 style="text-align: center;">Painel de Indicadores - Musical</h2>
+
+<iframe width="100%" height="750"
+    src="https://app.powerbi.com/reportEmbed?reportId=d7df83d2-f78f-48e9-9a91-0fd2bb3c2516&autoAuth=true&ctid=cf317ceb-053a-4623-8cdf-e85c568157f8"
+    frameborder="0" allowfullscreen></iframe>
+
+<script>
+function showAlert(msg) {
+    const alerta = document.createElement('div');
+    alerta.style = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: yellow; padding: 1rem; font-weight: bold; border: 2px solid black; z-index: 9999;';
+    alerta.innerHTML = msg;
+    document.body.appendChild(alerta);
+    setTimeout(() => { alerta.remove(); }, 5000);
+}
+
+document.addEventListener('copy', function () {
+    fetch("{% url 'auditoria_log' %}");
+    showAlert(`⚠️ Copiar conteúdo é proibido!<br>Usuário: {{ username }}<br>Data e Hora: {{ data_hora }}`);
+});
+
+document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+    showAlert(`⚠️ Clique direito desabilitado!<br>Usuário: {{ username }}`);
+});
+</script>
+{% endblock %}

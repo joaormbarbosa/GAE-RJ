@@ -6,21 +6,30 @@
 <div class="card" style="text-align: center;">
     <h2>Olá, {{ request.user.first_name|default:request.user.username }}!</h2>
     <p>Esta é a tela inicial do sistema administrativo.</p>
-<div style="margin-top: 2rem;">
-    <a href="{% url 'confirmar_sigilo' %}">
-        <button style="margin: 0.5rem;">📊 Acessar Dashboard BI</button>
-    </a>
 
-    <a href="{% url 'checklist_geral' %}">
-        <button style="margin: 0.5rem;">📋 Checklist Geral</button>
-    </a>
+    <div style="margin-top: 2rem;">
+        <!-- Botão para o BI Administrativo -->
+        <a href="{% url 'confirmar_sigilo' %}">
+            <button style="margin: 0.5rem;">📊 Dashboard Administrativo</button>
+        </a>
+
+        <!-- Botão para o BI Mocidade -->
+        <a href="{% url 'confirmar_sigilo_mocidade' %}">
+            <button style="margin: 0.5rem;">🎯 Dashboard Mocidade</button>
+        </a>
+
+        <!-- Botão para o BI Musical -->
+        <a href="{% url 'confirmar_sigilo_musical' %}">
+            <button style="margin: 0.5rem;">🎼 Dashboard Musical</button>
+        </a>
+    </div>
 
     {% if request.user.is_staff %}
-    <a href="/admin/" target="_blank">
-        <button style="margin: 0.5rem;">⚙️ Meus Controles (Admin)</button>
-    </a>
+    <div style="margin-top: 2rem;">
+        <a href="/admin/" target="_blank">
+            <button style="margin: 0.5rem;">⚙️ Meus Controles (Admin)</button>
+        </a>
+    </div>
     {% endif %}
-</div>
-
 </div>
 {% endblock %}
