@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Bem-vindo(a){% endblock %}
+{% block title %}A Paz de Deus, Caro(a) Irmã(o)!{% endblock %}
 
 {% block content %}
 <div class="card" style="text-align: center;">
-    <h2>Olá, {{ request.user.first_name|default:request.user.username }}!</h2>
-    <p>Esta é a tela inicial do sistema administrativo.</p>
+    <h2>Seja Bem-vindo(a) {{ request.user.first_name|default:request.user.username }}!</h2>
+    <p>Sistema de Indicadores de Gestão - RJ</p>
 
     <div style="margin-top: 2rem;">
         <!-- Botão para o BI Administrativo -->
