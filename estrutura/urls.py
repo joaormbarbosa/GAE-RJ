@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from .views import mapas_regionais
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -10,4 +11,6 @@ urlpatterns = [
     path('bi-musical/', views.bi_musical, name='bi_musical'),
     path('auditoria-log/', views.auditoria_log, name='auditoria_log'),
     path('mapas-regionais/', mapas_regionais, name='mapas_regionais'),
+    path('', views.home, name='home'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]

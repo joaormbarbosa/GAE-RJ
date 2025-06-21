@@ -28,6 +28,6 @@ class RegistroAuditoriaAdmin(admin.ModelAdmin):
     list_filter = ('acao', 'data_hora')
     search_fields = ('usuario__username', 'acao')
     
-admin.site.site_header = "GAE-RJ — Administração do Sistema"
-admin.site.site_title = "GAE-RJ"
-admin.site.index_title = "Painel Administrativo GAE-RJ"
+admin.site.site_header = "SIG - GAE-RJ"
+admin.site.site_title = "SIG - GAE-RJ"
+admin.site.index_title = "SIG - Sistema de Indicadores de Gestão - GAE-RJ"
