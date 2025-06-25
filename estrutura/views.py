@@ -3,11 +3,18 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.timezone import now
 from .models import RegistroAuditoria
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 # HOME
 @login_required
 def home(request):
     return render(request, 'home.html')
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('https://gae-rj-v-2.onrender.com/')
 
 # ADMINISTRATIVO
 @login_required
@@ -63,8 +70,7 @@ def auditoria_log(request):
     )
     return JsonResponse({'status': 'registrado'})
 
-# MAPAS REGIONAIS
-
+# MAPAS REGIONAIS (Agora com login_required)
 @login_required
 def mapas_regionais(request):
     mapas = [
