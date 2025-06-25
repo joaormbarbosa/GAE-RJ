@@ -93,3 +93,14 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "SIG - GAE - RJ",
+    "site_header": "SIG - GAE - RJ",
+    "site_brand": "SIG - GAE - RJ",
+    "welcome_sign": "Bem-vindo ao SIG - Sistema de Indicadores de Gestão",
+    "copyright": "GAE - RJ",
+    "search_model": ["estrutura.Usuario"],  # ajuste se quiser adicionar busca por usuários
+    "show_sidebar": True,
+    "navigation_expanded": True,
+}
