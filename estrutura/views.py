@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.timezone import now
@@ -9,6 +9,13 @@ from django.shortcuts import redirect
 # HOME
 @login_required
 def home(request):
+       u = request.user
+    contexto = {
+        'can_admin': in_group(u, 'Administrativo'),
+        'can_musical': in_group(u, 'Musical'),
+        'can_mocidade': in_group(u, 'Mocidade'),
+        'can_novo': in_group(u, 'NovoDashboard'),
+    }
     return render(request, 'home.html')
 
 @login_required
@@ -24,6 +31,7 @@ def confirmar_sigilo(request):
     return render(request, 'confirmar_sigilo.html')
 
 @login_required
+@user_passes_test(lambda u: in_group(u, 'Administrativo'))
 def bi_administrativo(request):
     contexto = {
         'username': request.user.username,
@@ -39,6 +47,7 @@ def confirmar_sigilo_mocidade(request):
     return render(request, 'confirmar_sigilo_mocidade.html')
 
 @login_required
+@user_passes_test(lambda u: in_group(u, 'Mocidade'))
 def bi_mocidade(request):
     contexto = {
         'username': request.user.username,
@@ -54,12 +63,24 @@ def confirmar_sigilo_musical(request):
     return render(request, 'confirmar_sigilo_musical.html')
 
 @login_required
+@user_passes_test(lambda u: in_group(u, 'Musical'))
 def bi_musical(request):
     contexto = {
         'username': request.user.username,
         'data_hora': now().strftime('%d/%m/%Y %H:%M:%S')
     }
     return render(request, 'bi_musical.html', contexto)
+
+@login_required
+def confirmar_sigilo_EBI(request):
+    if request.method == 'POST':
+        return redirect('bi_EBI')
+    return render(request, 'confirmar_sigilo_EBI.html')
+
+@user_passes_test(lambda u: in_group(u, 'EBI'))
+def bi_novo(request):
+    ctx = {'username': request.user.username, 'data_hora': now().strftime('%d/%m/%Y %H:%M:%S')}
+    return render(request, 'bi_EBI.html', ctx)
 
 # AUDITORIA
 @login_required

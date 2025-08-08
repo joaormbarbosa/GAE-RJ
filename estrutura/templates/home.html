@@ -9,29 +9,30 @@
     Sistema de Indicadores de Gestão - GAE-RJ
 </div>
 
-    <div style="margin-top: 2rem;">
-        <!-- Botão para o BI Administrativo -->
-        <a href="{% url 'confirmar_sigilo' %}">
-            <button style="margin: 0.5rem;">📊 Dashboard Administrativo</button>
-        </a>
+   <div style="margin-top: 2rem;">
+  {% if can_admin %}
+  <a href="{% url 'confirmar_sigilo' %}"><button style="margin:0.5rem;">📊 Dashboard Administrativo</button></a>
+  {% endif %}
 
-        <!-- Botão para o BI Mocidade - Link externo no Locker Studio -->
-        <a href="https://lookerstudio.google.com/reporting/2327dda5-e148-4332-b3c7-1cbc5d776084/page/u1WJF" target="_blank">
-        <button style="margin: 0.5rem;">🎯 Dashboard Mocidade</button>
-        </a>
+  {% if can_musical %}
+  <a href="{% url 'confirmar_sigilo_musical' %}"><button style="margin:0.5rem;">🎼 Dashboard Musical</button></a>
+  {% endif %}
 
-        <!-- Botão para o BI Musical -->
-        <a href="{% url 'confirmar_sigilo_musical' %}">
-            <button style="margin: 0.5rem;">🎼 Dashboard Musical</button>
-        </a>
-    </div>
+  {% if can_mocidade %}
+  <a href="{% url 'confirmar_sigilo_mocidade' %}"><button style="margin:0.5rem;">👥 Dashboard Mocidade</button></a>
+  {% endif %}
 
-    {% if request.user.is_staff %}
-    <div style="margin-top: 2rem;">
-        <a href="/admin/" target="_blank">
-            <button style="margin: 0.5rem;">⚙️ Meus Controles (Admin)</button>
-        </a>
-    </div>
+  {% if can_novo %}
+  <a href="{% url 'confirmar_sigilo_novo' %}"><button style="margin:0.5rem;"> 🆕 Dashboard EBI</button></a>
+  {% endif %}
+
+  <a href="{% url 'mapas_regionais' %}"><button style="margin:0.5rem;">🗺️ Mapas Regionais</button></a>
+
+  {% if request.user.is_staff %}
+  <a href="/admin/" target="_blank"><button style="margin:0.5rem;">⚙️ Meus Controles (Admin)</button></a>
+  {% endif %}
+</div>
+
     {% endif %}
 </div>
 {% endblock %}
