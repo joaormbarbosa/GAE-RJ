@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.timezone import now
@@ -38,7 +38,6 @@ def confirmar_sigilo(request):
     return render(request, 'confirmar_sigilo.html')
 
 @login_required
-@user_passes_test(lambda u: in_group(u, 'Administrativo'))
 def bi_administrativo(request):
     contexto = {
         'username': request.user.username,
@@ -56,7 +55,6 @@ def confirmar_sigilo_mocidade(request):
     return render(request, 'confirmar_sigilo_mocidade.html')
 
 @login_required
-@user_passes_test(lambda u: in_group(u, 'Mocidade'))
 def bi_mocidade(request):
     contexto = {
         'username': request.user.username,
@@ -74,7 +72,6 @@ def confirmar_sigilo_musical(request):
     return render(request, 'confirmar_sigilo_musical.html')
 
 @login_required
-@user_passes_test(lambda u: in_group(u, 'Musical'))
 def bi_musical(request):
     contexto = {
         'username': request.user.username,
@@ -92,7 +89,6 @@ def confirmar_sigilo_EBI(request):
     return render(request, 'confirmar_sigilo_EBI.html')
 
 @login_required
-@user_passes_test(lambda u: in_group(u, 'EBI'))
 def bi_EBI(request):
     contexto = {
         'username': request.user.username,
