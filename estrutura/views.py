@@ -2,28 +2,35 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.timezone import now
-from .models import RegistroAuditoria
 from django.contrib.auth import logout
-from django.shortcuts import redirect
+from django.contrib.auth.models import Group
+from .models import RegistroAuditoria
+
+# Helper: checar se o usuário está em um grupo
+def in_group(user, group_name: str) -> bool:
+    return user.is_authenticated and user.groups.filter(name=group_name).exists()
 
 # HOME
 @login_required
 def home(request):
-       u = request.user
+    u = request.user
     contexto = {
         'can_admin': in_group(u, 'Administrativo'),
         'can_musical': in_group(u, 'Musical'),
         'can_mocidade': in_group(u, 'Mocidade'),
         'can_ebi': in_group(u, 'EBI'),
     }
-    return render(request, 'home.html')
+    return render(request, 'home.html', contexto)
 
 @login_required
 def logout_view(request):
     logout(request)
+    # Se preferir usar configuração do Django, pode redirecionar para 'login'
     return redirect('https://gae-rj-v-2.onrender.com/')
 
+# ---------------------------
 # ADMINISTRATIVO
+# ---------------------------
 @login_required
 def confirmar_sigilo(request):
     if request.method == 'POST':
@@ -35,11 +42,13 @@ def confirmar_sigilo(request):
 def bi_administrativo(request):
     contexto = {
         'username': request.user.username,
-        'data_hora': now().strftime('%d/%m/%Y %H:%M:%S')
+        'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
     }
     return render(request, 'bi.html', contexto)
 
+# ---------------------------
 # MOCIDADE
+# ---------------------------
 @login_required
 def confirmar_sigilo_mocidade(request):
     if request.method == 'POST':
@@ -51,11 +60,13 @@ def confirmar_sigilo_mocidade(request):
 def bi_mocidade(request):
     contexto = {
         'username': request.user.username,
-        'data_hora': now().strftime('%d/%m/%Y %H:%M:%S')
+        'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
     }
     return render(request, 'bi_mocidade.html', contexto)
 
+# ---------------------------
 # MUSICAL
+# ---------------------------
 @login_required
 def confirmar_sigilo_musical(request):
     if request.method == 'POST':
@@ -67,22 +78,31 @@ def confirmar_sigilo_musical(request):
 def bi_musical(request):
     contexto = {
         'username': request.user.username,
-        'data_hora': now().strftime('%d/%m/%Y %H:%M:%S')
+        'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
     }
     return render(request, 'bi_musical.html', contexto)
 
+# ---------------------------
+# EBI (novo)
+# ---------------------------
 @login_required
 def confirmar_sigilo_EBI(request):
     if request.method == 'POST':
         return redirect('bi_EBI')
     return render(request, 'confirmar_sigilo_EBI.html')
 
+@login_required
 @user_passes_test(lambda u: in_group(u, 'EBI'))
-def bi_novo(request):
-    ctx = {'username': request.user.username, 'data_hora': now().strftime('%d/%m/%Y %H:%M:%S')}
+def bi_EBI(request):
+    contexto = {
+        'username': request.user.username,
+        'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
+    }
     return render(request, 'bi_EBI.html', contexto)
 
+# ---------------------------
 # AUDITORIA
+# ---------------------------
 @login_required
 def auditoria_log(request):
     RegistroAuditoria.objects.create(
@@ -91,7 +111,9 @@ def auditoria_log(request):
     )
     return JsonResponse({'status': 'registrado'})
 
-# MAPAS REGIONAIS (Agora com login_required)
+# ---------------------------
+# MAPAS REGIONAIS
+# ---------------------------
 @login_required
 def mapas_regionais(request):
     mapas = [

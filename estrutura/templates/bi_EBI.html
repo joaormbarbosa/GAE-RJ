@@ -1,4 +1,4 @@
-   {% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Dashboard EBI{% endblock %}
 
@@ -25,7 +25,6 @@
     }
 </style>
 
-
 <!-- Marca d’água com nome do usuário -->
 <div class="watermark">
     {% for i in "12345678"|make_list %}
@@ -39,9 +38,13 @@
 
 <h2 style="text-align: center;">Dashboard EBI</h2>
 
-<iframe title="Indicadores Regionais - Power BI" width="100%" height="750"
+<iframe
+    title="Dashboard EBI"
+    width="100%"
+    height="750"
     src="https://app.powerbi.com/view?r=eyJrIjoiM2YyNDkxYmQtNWM1MC00Yjk4LWIyYTUtZWQ4M2I1ZWQ5MjIzIiwidCI6ImNmMzE3Y2ViLTA1M2EtNDYyMy04Y2RmLWU4NWM1NjgxNTdmOCJ9&pageName=03539e3353ee58f008b4"
-    frameborder="0" allowfullscreen="true">
+    frameborder="0"
+    allowfullscreen="true">
 </iframe>
 
 <script>
