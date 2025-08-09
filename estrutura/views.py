@@ -2,13 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.timezone import now
-from django.contrib.auth import logout
-from django.contrib.auth.models import Group
 from .models import RegistroAuditoria
-
-# Helper: checar se o usuário está em um grupo
-def in_group(user, group_name: str) -> bool:
-    return user.is_authenticated and user.groups.filter(name=group_name).exists()
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 # HOME
 @login_required
@@ -19,10 +15,8 @@ def home(request):
 @login_required
 def logout_view(request):
     logout(request)
-    # Se preferir usar configuração do Django, pode redirecionar para 'login'
     return redirect('https://gae-rj-v-2.onrender.com/')
 
-# ---------------------------
 # ADMINISTRATIVO
 # ---------------------------
 @login_required
@@ -101,9 +95,7 @@ def auditoria_log(request):
     )
     return JsonResponse({'status': 'registrado'})
 
-# ---------------------------
-# MAPAS REGIONAIS
-# ---------------------------
+# MAPAS REGIONAIS (Agora com login_required)
 @login_required
 def mapas_regionais(request):
     mapas = [

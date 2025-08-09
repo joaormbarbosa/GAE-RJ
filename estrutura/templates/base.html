@@ -107,7 +107,7 @@
         <a href="{% url 'home' %}">🏠 Início</a>
         {% if user.is_authenticated %}
             <a href="{% url 'password_change' %}">🔐 Alterar senha</a>
-            <a href="{% url 'logout' %}">🚪 Sair</a> 
+            <a href="{% url 'logout' %}">🚪 Sair</a>
         {% else %}
             <a href="{% url 'login' %}">🔑 Login</a>
         {% endif %}

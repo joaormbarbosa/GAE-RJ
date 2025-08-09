@@ -1,40 +1,39 @@
 {% extends "base.html" %}
-{% block title %}Dashboard Musical{% endblock %}
+{% block title %}Dashboard Musical - Em Construção{% endblock %}
 
 {% block content %}
 <style>
-    .watermark {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        pointer-events: none;
-        z-index: 1;
-        font-size: 1.5rem;
-        color: #666666;
-    }
-
-    .watermark span {
-        position: absolute;
-        white-space: nowrap;
-        opacity: 0.12;
-        transform: rotate(-30deg);
-        user-select: none;
-    }
+  .watermark{
+    position:fixed; inset:0; pointer-events:none; z-index:1;
+    font-size:1.4rem; color:#666;
+  }
+  .watermark span{
+    position:absolute; white-space:nowrap; opacity:.12;
+    transform:rotate(-30deg); user-select:none;
+  }
 </style>
 
-<div class="watermark">
-    {% for i in "12345678"|make_list %}
-        {% for j in "12345678"|make_list %}
-            <span style="top: {{ forloop.parentloop.counter0|add:1 }}0vh; left: {{ forloop.counter0|add:1 }}0vw;">
-                {{ username }}
-            </span>
-        {% endfor %}
-    {% endfor %}
-</div>
+<div id="wm" class="watermark"></div>
 
-<h2 style="text-align: center;">Painel de Indicadores - Musical</h2>
+<script>
+  (function(){
+    const wm = document.getElementById('wm');
+    const user = "{{ username|escapejs }}";
+    // grade 8x8 (igual à antiga), sem CSS inline com {{ }}
+    const rows = 8, cols = 8;
+    for(let r=0; r<rows; r++){
+      for(let c=0; c<cols; c++){
+        const s = document.createElement('span');
+        s.textContent = user;
+        s.style.top  = `${(r+1)*10}vh`;
+        s.style.left = `${(c+1)*10}vw`;
+        wm.appendChild(s);
+      }
+    }
+  })();
+</script>
+
+<h2 style="text-align: center;">Indicadores de Gestão Musical - Em construção</h2>
 
 <iframe width="100%" height="750"
     src="https://app.powerbi.com/view?r=eyJrIjoiNTFhOWJjNTItZGE0Yi00ODZlLWE2MGYtNWY5OGI3NzI1NzIyIiwidCI6ImNmMzE3Y2ViLTA1M2EtNDYyMy04Y2RmLWU4NWM1NjgxNTdmOCJ9&pageName=c06e6e3fcc3d9d966a0d"

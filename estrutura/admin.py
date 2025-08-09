@@ -5,31 +5,29 @@ from django.contrib.auth.admin import UserAdmin
 @admin.register(Estado)
 class EstadoAdmin(admin.ModelAdmin):
     list_display = ('nome',)
-    search_fields = ('nome',)
 
 @admin.register(RegionalAdministrativa)
-class RegionalAdministrativaAdmin(admin.ModelAdmin):
+class RegionalAdmin(admin.ModelAdmin):
     list_display = ('nome', 'estado')
-    search_fields = ('nome',)
     list_filter = ('estado',)
 
 @admin.register(Administracao)
 class AdministracaoAdmin(admin.ModelAdmin):
     list_display = ('nome', 'regional')
-    search_fields = ('nome',)
     list_filter = ('regional',)
 
 @admin.register(Usuario)
 class UsuarioAdmin(UserAdmin):
-    fieldsets = UserAdmin.fieldsets + (
-        ('Informações adicionais', {'fields': ('administracao',)}),
-    )
-    list_display = ('username', 'email', 'is_staff', 'is_active', 'administracao')
-    search_fields = ('username', 'email')
-    list_filter = ('is_staff', 'is_active', 'administracao')
+    model = Usuario
+    list_display = ('username', 'email', 'administracao', 'is_staff', 'is_active')
+    list_filter = ('administracao', 'is_staff', 'is_active')
 
 @admin.register(RegistroAuditoria)
 class RegistroAuditoriaAdmin(admin.ModelAdmin):
     list_display = ('usuario', 'acao', 'data_hora')
+    list_filter = ('acao', 'data_hora')
     search_fields = ('usuario__username', 'acao')
-    list_filter = ('data_hora',)
+    
+admin.site.site_header = "SIG - GAE-RJ"
+admin.site.site_title = "SIG - GAE-RJ"
+admin.site.index_title = "SIG - Sistema de Indicadores de Gestão - GAE-RJ"
