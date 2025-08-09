@@ -14,13 +14,7 @@ def in_group(user, group_name: str) -> bool:
 @login_required
 def home(request):
     u = request.user
-    contexto = {
-        'can_admin': in_group(u, 'Administrativo'),
-        'can_musical': in_group(u, 'Musical'),
-        'can_mocidade': in_group(u, 'Mocidade'),
-        'can_ebi': in_group(u, 'EBI'),
-    }
-    return render(request, 'home.html', contexto)
+    return render(request, 'home.html')
 
 @login_required
 def logout_view(request):
