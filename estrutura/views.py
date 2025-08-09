@@ -14,7 +14,7 @@ def home(request):
         'can_admin': in_group(u, 'Administrativo'),
         'can_musical': in_group(u, 'Musical'),
         'can_mocidade': in_group(u, 'Mocidade'),
-        'can_novo': in_group(u, 'NovoDashboard'),
+        'can_ebi': in_group(u, 'EBI'),
     }
     return render(request, 'home.html')
 
@@ -80,7 +80,7 @@ def confirmar_sigilo_EBI(request):
 @user_passes_test(lambda u: in_group(u, 'EBI'))
 def bi_novo(request):
     ctx = {'username': request.user.username, 'data_hora': now().strftime('%d/%m/%Y %H:%M:%S')}
-    return render(request, 'bi_EBI.html', ctx)
+    return render(request, 'bi_EBI.html', contexto)
 
 # AUDITORIA
 @login_required
