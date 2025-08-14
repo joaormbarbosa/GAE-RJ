@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.utils.timezone import now
 from django.http import HttpResponse
 
+
 from .models import RegistroAuditoria
 
 
@@ -16,10 +17,10 @@ def home(request):
     return render(request, 'home.html')
 
 
-@login_required
+
 def logout_view(request):
     logout(request)
-    return redirect('https://gae-rj-v-2.onrender.com/')
+    return redirect('home')
 
 
 # =========================
