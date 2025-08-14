@@ -104,7 +104,7 @@
         <strong>SIG - RJ</strong>
     </div>
     <div class="auth-links">
-        {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     <!-- itens para logado -->
         <a href="{% url 'home' %}">🏠 Início</a>
         <a href="{% url 'password_change' %}">🔒 Alterar senha</a>
