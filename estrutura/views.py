@@ -122,32 +122,37 @@ def formularios(request):
         {
             "nome": "EBI – RPC's",
             "descricao": "Dados para o painel da EBI.",
-            "url": "https://forms.office.com/r/SEU_ID_EBI"
+            "url": "https://forms.cloud.microsoft/r/JmQeKR6yCS"
         },
         {
             "nome": "Pedidos de Visitas",
-            "descricao": "Envio de dados para consolidação do DARPE.",
-            "url": "https://forms.office.com/r/SEU_ID_DARPE"
+            "descricao": "Envio de pedidos de visitas.",
+            "url": "https://forms.cloud.microsoft/r/5DAva9WsCj"
         },
         {
             "nome": "Visitas Realizadas",
-            "descricao": "Envio de dados para consolidação do DARPE.",
-            "url": "https://forms.office.com/r/SEU_ID_DARPE"
+            "descricao": "Envio de dados de visitas realizadas.",
+            "url": "https://forms.cloud.microsoft/r/ASZ4e7mVLT"
         },
         {
             "nome": "Musical – GEM",
-            "descricao": "Informações dos conjuntos e músicos.",
-            "url": "https://forms.office.com/r/SEU_ID_MUSICAL"
+            "descricao": "Informações dos Grupos de Estudos Musicais.",
+            "url": "https://forms.cloud.microsoft/r/RNp3ebHVXA"
         },
         {
             "nome": "Musical – Eventos",
-            "descricao": "Informações dos conjuntos e músicos.",
-            "url": "https://forms.office.com/r/SEU_ID_MUSICAL"
+            "descricao": "Informações dos Eventos da Parte Musical",
+            "url": "https://forms.cloud.microsoft/r/c19TBeCgYj"
         },
         {
-            "nome": "Mocidade",
-            "descricao": "Coleta de informações de atividades da mocidade.",
-            "url": "https://forms.office.com/r/SEU_ID_MOCIDADE"
+            "nome": "Mocidade - RJM's",
+            "descricao": "Coleta de informações dos eventos da mocidade.",
+            "url": "Em construção"
+        },
+        {
+            "nome": "Mocidade - Eventos",
+            "descricao": "Coleta de informações dos eventos da mocidade.",
+            "url": "Em construção"
         },
     ]
     return render(request, 'formularios.html', {"formularios": formularios})
