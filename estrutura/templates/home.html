@@ -20,7 +20,7 @@
     <a href="{% url 'mapas_regionais' %}"><button style="margin:0.5rem;">🗺️ Mapas Regionais</button></a>
 
     <!-- Administrativo (rota com login/confirmar sigilo) -->
-    {% if can_admin %}
+    {% if request.user.is_staff %}
       <a href="{% url 'confirmar_sigilo' %}"><button style="margin:0.5rem;">📊 Dashboard Administrativo 🔒</button></a>
     {% endif %}
 

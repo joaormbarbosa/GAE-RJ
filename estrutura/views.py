@@ -3,6 +3,7 @@ from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.timezone import now
+from django.http import HttpResponse
 
 from .models import RegistroAuditoria
 
@@ -112,3 +113,6 @@ def mapas_regionais(request):
         "mapa_nome": mapa_nome,
     }
     return render(request, "mapas_regionais.html", context)
+    
+def healthz(request):
+    return HttpResponse("ok")
