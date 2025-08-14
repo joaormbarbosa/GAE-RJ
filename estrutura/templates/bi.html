@@ -1,12 +1,11 @@
-   {% extends "base.html" %}
-
+{% extends "base.html" %}
 {% block title %}Dashboard Administrativo{% endblock %}
 
 {% block content %}
 <style>
   .watermark{
     position:fixed; inset:0; pointer-events:none; z-index:1;
-    font-size:1.4rem; color:#666;
+    font-size:1.2rem; color:#666; overflow:hidden;
   }
   .watermark span{
     position:absolute; white-space:nowrap; opacity:.12;
@@ -14,54 +13,61 @@
   }
 </style>
 
-<div id="wm" class="watermark"></div>
+<div id="wm" class="watermark" aria-hidden="true"></div>
 
-<script>
-  (function(){
-    const wm = document.getElementById('wm');
-    const user = "{{ username|escapejs }}";
-    // grade 8x8 (igual à antiga), sem CSS inline com {{ }}
-    const rows = 8, cols = 8;
-    for(let r=0; r<rows; r++){
-      for(let c=0; c<cols; c++){
-        const s = document.createElement('span');
-        s.textContent = user;
-        s.style.top  = `${(r+1)*10}vh`;
-        s.style.left = `${(c+1)*10}vw`;
-        wm.appendChild(s);
-      }
-    }
-  })();
-</script>
+<h2 style="text-align:center;">Administrativo</h2>
 
-<h2 style="text-align: center;">Dashboard de Indicadores</h2>
-
-<iframe title="Indicadores Regionais - Power BI" width="100%" height="750"
-    src="https://app.powerbi.com/view?r=eyJrIjoiOTNmYTdjZWEtMWQ2My00NDM3LThmOTItNjJhMjEzOWRmOWEzIiwidCI6ImNmMzE3Y2ViLTA1M2EtNDYyMy04Y2RmLWU4NWM1NjgxNTdmOCJ9"
-    frameborder="0" allowfullscreen="true">
+<iframe
+  title="Dashboard Administrativo"
+  width="100%" height="750"
+  src="<!-- MANTENHA AQUI A SUA URL DO POWER BI ADMIN -->"
+  frameborder="0"
+  allowfullscreen
+  referrerpolicy="strict-origin-when-cross-origin"
+  loading="lazy">
 </iframe>
 
 <script>
-function showAlert(msg) {
+(function () {
+  // Marca d’água
+  const wm = document.getElementById('wm');
+  const texto = `SIG - GAE-RJ • {{ username|default:"Visitante" }} • {{ data_hora }}`;
+  const colGap = 260, rowGap = 180;
+
+  function desenharWM() {
+    wm.innerHTML = '';
+    const cols = Math.ceil(window.innerWidth / colGap) + 1;
+    const rows = Math.ceil(window.innerHeight / rowGap) + 1;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const s = document.createElement('span');
+        s.textContent = texto;
+        s.style.left = (c * colGap - 40) + 'px';
+        s.style.top  = (r * rowGap  - 20) + 'px';
+        wm.appendChild(s);
+      }
+    }
+  }
+  window.addEventListener('resize', desenharWM);
+  desenharWM();
+
+  // Avisos locais (sem auditoria)
+  function showAlert(msg) {
     const alerta = document.createElement('div');
-    alerta.style = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: yellow; padding: 1rem; font-weight: bold; border: 2px solid black; z-index: 9999;';
+    alerta.style = 'position:fixed; top:20px; left:50%; transform:translateX(-50%); background:yellow; padding:1rem; font-weight:bold; border:2px solid black; z-index:9999;';
     alerta.innerHTML = msg;
     document.body.appendChild(alerta);
+    setTimeout(() => alerta.remove(), 4000);
+  }
 
-    setTimeout(() => {
-        alerta.remove();
-    }, 5000);
-}
+  document.addEventListener('copy', function () {
+    showAlert(`⚠️ Copiar conteúdo é proibido!<br>Usuário: {{ username|default:"Visitante" }}`);
+  });
 
-document.addEventListener('copy', function () {
-    fetch("{% url 'auditoria_log' %}");
-    showAlert(`⚠️ Copiar conteúdo é proibido!<br>Usuário: {{ username }}<br>Data e Hora: {{ data_hora }}`);
-});
-
-document.addEventListener('contextmenu', function (e) {
+  document.addEventListener('contextmenu', function (e) {
     e.preventDefault();
-    showAlert(`⚠️ Clique direito desabilitado!<br>Usuário: {{ username }}`);
-});
+    showAlert(`⚠️ Clique direito desabilitado!<br>Usuário: {{ username|default:"Visitante" }}`);
+  });
+})();
 </script>
 {% endblock %}
- 
