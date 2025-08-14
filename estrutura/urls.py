@@ -19,6 +19,9 @@ urlpatterns = [
     # Outros
     path('auditoria-log/', views.auditoria_log, name='auditoria_log'),
     path('mapas-regionais/', views.mapas_regionais, name='mapas_regionais'),
+    
+    # Formulários (página de links)
+    path('formularios/', views.formularios, name='formularios'),
 
     # Auth
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

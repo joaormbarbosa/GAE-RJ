@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Formulários de Coleta{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center;">Formulários de Coleta</h2>
+<p style="text-align:center; margin-bottom:1rem;">
+  Selecione um formulário para preencher. Os links abrem em nova aba.
+</p>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem;">
+  {% for f in formularios %}
+    <a href="{{ f.url }}" target="_blank" rel="noopener noreferrer"
+       style="text-decoration:none;">
+      <div style="background:#0d3b59; color:#fff; padding:1rem; border-radius:10px;
+                  box-shadow:0 4px 10px rgba(0,0,0,.08); min-height:110px;">
+        <div style="font-weight:700; margin-bottom:.35rem;">📝 {{ f.nome }}</div>
+        <div style="font-size:.95rem; opacity:.9;">{{ f.descricao }}</div>
+        <div style="margin-top:.6rem; font-size:.9rem; opacity:.85;">Abrir Microsoft Forms ↗</div>
+      </div>
+    </a>
+  {% empty %}
+    <div>Nenhum formulário disponível.</div>
+  {% endfor %}
+</div>
+{% endblock %}

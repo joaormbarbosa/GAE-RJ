@@ -113,6 +113,41 @@ def mapas_regionais(request):
         "mapa_nome": mapa_nome,
     }
     return render(request, "mapas_regionais.html", context)
-    
+
 def healthz(request):
     return HttpResponse("ok")
+def formularios(request):
+    formularios = [
+      
+        {
+            "nome": "EBI – RPC's",
+            "descricao": "Dados para o painel da EBI.",
+            "url": "https://forms.office.com/r/SEU_ID_EBI"
+        },
+        {
+            "nome": "Pedidos de Visitas",
+            "descricao": "Envio de dados para consolidação do DARPE.",
+            "url": "https://forms.office.com/r/SEU_ID_DARPE"
+        },
+        {
+            "nome": "Visitas Realizadas",
+            "descricao": "Envio de dados para consolidação do DARPE.",
+            "url": "https://forms.office.com/r/SEU_ID_DARPE"
+        },
+        {
+            "nome": "Musical – GEM",
+            "descricao": "Informações dos conjuntos e músicos.",
+            "url": "https://forms.office.com/r/SEU_ID_MUSICAL"
+        },
+        {
+            "nome": "Musical – Eventos",
+            "descricao": "Informações dos conjuntos e músicos.",
+            "url": "https://forms.office.com/r/SEU_ID_MUSICAL"
+        },
+        {
+            "nome": "Mocidade",
+            "descricao": "Coleta de informações de atividades da mocidade.",
+            "url": "https://forms.office.com/r/SEU_ID_MOCIDADE"
+        },
+    ]
+    return render(request, 'formularios.html', {"formularios": formularios})

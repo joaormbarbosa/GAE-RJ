@@ -18,6 +18,8 @@
 
     <!-- Outros -->
     <a href="{% url 'mapas_regionais' %}"><button style="margin:0.5rem;">🗺️ Mapas Regionais</button></a>
+    <a href="{% url 'formularios' %}"><button style="margin:0.5rem;">📝 Formulários</button></a>
+
 
     <!-- Administrativo (rota com login/confirmar sigilo) -->
     {% if request.user.is_staff %}
