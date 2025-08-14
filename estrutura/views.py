@@ -121,7 +121,7 @@ def formularios(request):
       
         {
             "nome": "EBI – RPC's",
-            "descricao": "Dados para o painel da EBI.",
+            "descricao": "Envio de Informações sobre RPC's - EBI.",
             "url": "https://forms.cloud.microsoft/r/JmQeKR6yCS"
         },
         {
@@ -131,7 +131,7 @@ def formularios(request):
         },
         {
             "nome": "Visitas Realizadas",
-            "descricao": "Envio de dados de visitas realizadas.",
+            "descricao": "Envio sobre as visitas realizadas.",
             "url": "https://forms.cloud.microsoft/r/ASZ4e7mVLT"
         },
         {
@@ -146,13 +146,13 @@ def formularios(request):
         },
         {
             "nome": "Mocidade - RJM's - Recitativos",
-            "descricao": "Coleta de informações dos recitativos das RJM's.",
+            "descricao": "Informações dos recitativos das RJM's.",
             "url": "https://docs.google.com/forms/d/e/1FAIpQLSc_GW_A1POnojKTvn6LAcY-yNCRT_Mq8Msmpt3ztobgaIYN8A/viewform "
         },
         {
             "nome": "Mocidade - Eventos",
-            "descricao": "Coleta de informações dos eventos da mocidade.",
-            "url": "Em construção"
+            "descricao": "Informações dos eventos da mocidade.",
+            "url": "https://forms.gle/YrQf41HfCproQBvR8"
         },
     ]
     return render(request, 'formularios.html', {"formularios": formularios})
