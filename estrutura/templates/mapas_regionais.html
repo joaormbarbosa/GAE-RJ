@@ -1,25 +1,38 @@
 {% extends "base.html" %}
+{% block title %}Mapas Regionais{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h1 class="mb-4">Mapas Regionais</h1>
+<h2 style="text-align:center;">Mapas Regionais</h2>
+<p style="text-align:center; margin-bottom:1rem;">
+  Clique em um card para visualizar o mapa dentro do sistema.
+</p>
 
-  <div class="row">
-    {% for mapa in mapas %}
-    <div class="col-md-4 mb-3">
-      <form method="get">
-        <input type="hidden" name="mapa" value="{{ mapa.url }}">
-        <button type="submit" class="btn btn-primary btn-block">{{ mapa.nome }}</button>
-      </form>
-    </div>
-    {% endfor %}
-  </div>
-
-  {% if mapa_selecionado %}
-  <div class="mt-5">
-    <h3>{{ mapa_nome }}</h3>
-    <iframe src="{{ mapa_selecionado }}" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
-  </div>
-  {% endif %}
+{# grade de cards no mesmo estilo da página de Formulários #}
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem;">
+  {% for mapa in mapas %}
+    <a href="{% url 'mapas_regionais' %}?mapa={{ mapa.url|urlencode }}" style="text-decoration:none;">
+      <div
+        style="
+          background:#0d3b59; color:#fff; padding:1rem; border-radius:10px;
+          box-shadow:0 4px 10px rgba(0,0,0,.08); min-height:110px;
+          {% if mapa_selecionado == mapa.url %}outline:3px solid #fff; outline-offset:-3px;{% endif %}
+        ">
+        <div style="font-weight:700; margin-bottom:.35rem;">🗺️ {{ mapa.nome }}</div>
+        <div style="font-size:.95rem; opacity:.9;">Visualizar embutido</div>
+      </div>
+    </a>
+  {% endfor %}
 </div>
+
+{% if mapa_selecionado %}
+  <div style="margin-top:2rem;">
+    <h3 style="margin:0 0 .6rem 0;">{{ mapa_nome }}</h3>
+    <iframe
+      src="{{ mapa_selecionado }}"
+      title="Mapa Regional - {{ mapa_nome }}"
+      width="100%" height="520"
+      frameborder="0" allowfullscreen>
+    </iframe>
+  </div>
+{% endif %}
 {% endblock %}

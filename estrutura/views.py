@@ -117,43 +117,72 @@ def mapas_regionais(request):
 
 def healthz(request):
     return HttpResponse("ok")
+
 def formularios(request):
-    formularios = [
-      
+    itens = [
         {
             "nome": "EBI – RPC's",
             "descricao": "Envio de Informações sobre RPC's - EBI.",
-            "url": "https://forms.cloud.microsoft/r/JmQeKR6yCS"
+            "url": "https://forms.cloud.microsoft/r/JmQeKR6yCS",
         },
         {
             "nome": "Pedidos de Visitas",
             "descricao": "Envio de pedidos de visitas.",
-            "url": "https://forms.cloud.microsoft/r/5DAva9WsCj"
+            "url": "https://forms.cloud.microsoft/r/5DAva9WsCj",
         },
         {
             "nome": "Visitas Realizadas",
             "descricao": "Envio sobre as visitas realizadas.",
-            "url": "https://forms.cloud.microsoft/r/ASZ4e7mVLT"
+            "url": "https://forms.cloud.microsoft/r/ASZ4e7mVLT",
         },
         {
             "nome": "Musical – GEM",
             "descricao": "Informações dos Grupos de Estudos Musicais.",
-            "url": "https://forms.cloud.microsoft/r/RNp3ebHVXA"
+            "url": "https://forms.cloud.microsoft/r/RNp3ebHVXA",
         },
         {
             "nome": "Musical – Eventos",
             "descricao": "Informações dos Eventos da Parte Musical",
-            "url": "https://forms.cloud.microsoft/r/c19TBeCgYj"
+            "url": "https://forms.cloud.microsoft/r/c19TBeCgYj",
         },
         {
             "nome": "Mocidade - RJM's - Recitativos",
             "descricao": "Informações dos recitativos das RJM's.",
-            "url": "https://docs.google.com/forms/d/e/1FAIpQLSc_GW_A1POnojKTvn6LAcY-yNCRT_Mq8Msmpt3ztobgaIYN8A/viewform "
+            # use o link COMPLETO do Google Forms (docs.google.com/forms/.../viewform)
+            "url": "https://docs.google.com/forms/d/e/1FAIpQLSc_GW_A1POnojKTvn6LAcY-yNCRT_Mq8Msmpt3ztobgaIYN8A/viewform",
         },
         {
             "nome": "Mocidade - Eventos",
             "descricao": "Informações dos eventos da mocidade.",
-            "url": "https://forms.gle/YrQf41HfCproQBvR8"
+            # substitua forms.gle por docs.google.com/forms/.../viewform para embutir
+            "url": "https://docs.google.com/forms/d/e/SEU_FORM_ID/viewform",
         },
     ]
-    return render(request, 'formularios.html', {"formularios": formularios})
+
+    def make_embed(u: str):
+        u = u.strip()
+        # Microsoft Forms
+        if ("forms.office.com" in u) or ("forms.microsoft.com" in u) or ("forms.cloud.microsoft" in u):
+            return u + ("&" if "?" in u else "?") + "embed=true"
+        # Google Forms (link completo do docs.google.com/forms)
+        if "docs.google.com/forms" in u:
+            return u + ("&" if "?" in u else "?") + "embedded=true"
+        # Não embutível (ex.: forms.gle curto)
+        return None
+
+    for f in itens:
+        base = f["url"].strip()
+        f["open_url"] = base
+        f["embed_url"] = make_embed(base)
+
+    form_url = request.GET.get("form")  # recebemos a embed_url
+    form_nome = next((i["nome"] for i in itens if i["embed_url"] == form_url), None)
+    open_url = next((i["open_url"] for i in itens if i["embed_url"] == form_url), None)
+
+    context = {
+        "formularios": itens,
+        "form_selecionado": form_url,
+        "form_nome": form_nome,
+        "form_open_url": open_url,
+    }
+    return render(request, "formularios.html", context)

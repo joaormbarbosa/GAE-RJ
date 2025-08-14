@@ -1,25 +1,63 @@
 {% extends "base.html" %}
-{% block title %}Formulários de Coleta{% endblock %}
+{% block title %}Formulários{% endblock %}
 
 {% block content %}
-<h2 style="text-align:center;">Formulários Diversos</h2>
+<h2 style="text-align:center;">Formulários</h2>
 <p style="text-align:center; margin-bottom:1rem;">
-  Selecione um formulário para preencher. Os links abrem em nova aba.
+  Clique em um card para preencher o formulário <strong>dentro do sistema</strong>. Caso um formulário não permita
+  incorporação, ele abrirá em uma nova aba.
 </p>
 
+{# grade de cards no mesmo estilo dos Mapas #}
 <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem;">
   {% for f in formularios %}
-    <a href="{{ f.url }}" target="_blank" rel="noopener noreferrer"
-       style="text-decoration:none;">
-      <div style="background:#0d3b59; color:#fff; padding:1rem; border-radius:10px;
-                  box-shadow:0 4px 10px rgba(0,0,0,.08); min-height:110px;">
-        <div style="font-weight:700; margin-bottom:.35rem;">📝 {{ f.nome }}</div>
-        <div style="font-size:.95rem; opacity:.9;">{{ f.descricao }}</div>
-        <div style="margin-top:.6rem; font-size:.9rem; opacity:.85;">Abrir Formulário ↗</div>
-      </div>
-    </a>
-  {% empty %}
-    <div>Nenhum formulário disponível.</div>
+    {% if f.embed_url %}
+      <a href="{% url 'formularios' %}?form={{ f.embed_url|urlencode }}" style="text-decoration:none;">
+        <div
+          style="
+            background:#0d3b59; color:#fff; padding:1rem; border-radius:10px;
+            box-shadow:0 4px 10px rgba(0,0,0,.08); min-height:110px;
+            {% if form_selecionado == f.embed_url %}outline:3px solid #fff; outline-offset:-3px;{% endif %}
+          ">
+          <div style="font-weight:700; margin-bottom:.35rem;">📝 {{ f.nome }}</div>
+          <div style="font-size:.95rem; opacity:.9;">Preencher embutido</div>
+        </div>
+      </a>
+    {% else %}
+      <a href="{{ f.open_url }}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+        <div
+          style="
+            background:#0d3b59; color:#fff; padding:1rem; border-radius:10px;
+            box-shadow:0 4px 10px rgba(0,0,0,.08); min-height:110px;
+          ">
+          <div style="font-weight:700; margin-bottom:.35rem;">📝 {{ f.nome }}</div>
+          <div style="font-size:.95rem; opacity:.9;">Abrir em nova aba</div>
+        </div>
+      </a>
+    {% endif %}
   {% endfor %}
 </div>
+
+{% if form_selecionado %}
+  <div style="margin-top:2rem;">
+    <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.5rem;">
+      <h3 style="margin:0;">{{ form_nome }}</h3>
+      {% if form_open_url %}
+        <a href="{{ form_open_url }}" target="_blank" rel="noopener noreferrer" style="font-size:.95rem;">
+          Abrir em nova aba ↗
+        </a>
+      {% endif %}
+    </div>
+
+    <iframe
+      src="{{ form_selecionado }}"
+      title="Formulário - {{ form_nome }}"
+      width="100%" height="900"
+      frameborder="0" allowfullscreen
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      style="border:none; background:#fff;">
+    </iframe>
+  </div>
+{% endif %}
 {% endblock %}
