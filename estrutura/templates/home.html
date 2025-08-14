@@ -23,7 +23,7 @@
 
     <!-- Administrativo (rota com login/confirmar sigilo) -->
     {% if request.user.is_staff %}
-      <a href="{% url 'confirmar_sigilo' %}"><button style="margin:0.5rem;">📊 Dashboard Administrativo 🔒</button></a>
+      <a href="{% url 'confirmar_sigilo' %}"><button style="margin:0.5rem;">📊 Administrativo 🔒</button></a>
     {% endif %}
 
     {% if request.user.is_staff %}
