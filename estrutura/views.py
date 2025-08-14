@@ -148,36 +148,30 @@ def formularios(request):
         {
             "nome": "Mocidade - RJM's - Recitativos",
             "descricao": "Informações dos recitativos das RJM's.",
-            # use o link COMPLETO do Google Forms (docs.google.com/forms/.../viewform)
+            # pode ser forms.gle ou docs.google.com/forms
             "url": "https://docs.google.com/forms/d/e/1FAIpQLSc_GW_A1POnojKTvn6LAcY-yNCRT_Mq8Msmpt3ztobgaIYN8A/viewform",
         },
         {
             "nome": "Mocidade - Eventos",
             "descricao": "Informações dos eventos da mocidade.",
-            # substitua forms.gle por docs.google.com/forms/.../viewform para embutir
             "url": "https://docs.google.com/forms/d/e/SEU_FORM_ID/viewform",
         },
     ]
 
-    def make_embed(u: str):
-        u = u.strip()
-        # Microsoft Forms
-        if ("forms.office.com" in u) or ("forms.microsoft.com" in u) or ("forms.cloud.microsoft" in u):
-            return u + ("&" if "?" in u else "?") + "embed=true"
-        # Google Forms (link completo do docs.google.com/forms)
-        if "docs.google.com/forms" in u:
-            return u + ("&" if "?" in u else "?") + "embedded=true"
-        # Não embutível (ex.: forms.gle curto)
-        return None
+    def is_ms_forms(u: str) -> bool:
+        u = u.lower()
+        return ("forms.office.com" in u) or ("forms.microsoft.com" in u) or ("forms.cloud.microsoft" in u)
 
+    # Para cada item: sempre define open_url; só gera embed_url para Microsoft Forms.
     for f in itens:
         base = f["url"].strip()
         f["open_url"] = base
-        f["embed_url"] = make_embed(base)
+        f["embed_url"] = (base + ("&" if "?" in base else "?") + "embed=true") if is_ms_forms(base) else None
 
-    form_url = request.GET.get("form")  # recebemos a embed_url
-    form_nome = next((i["nome"] for i in itens if i["embed_url"] == form_url), None)
-    open_url = next((i["open_url"] for i in itens if i["embed_url"] == form_url), None)
+    # Se vier um form (apenas MS Forms), exibe embutido
+    form_url = request.GET.get("form")
+    form_nome = next((i["nome"] for i in itens if i.get("embed_url") == form_url), None)
+    open_url = next((i["open_url"] for i in itens if i.get("embed_url") == form_url), None)
 
     context = {
         "formularios": itens,
