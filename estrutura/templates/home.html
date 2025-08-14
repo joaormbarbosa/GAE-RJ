@@ -1,38 +1,32 @@
 {% extends "base.html" %}
-
-{% block title %}SIG - GAE-RJ{% endblock %}
+{% block title %}Sistema de Indicadores de Gestão - RJ{% endblock %}
 
 {% block content %}
-<div class="card" style="text-align: center;">
-    <h2>A Paz de Deus. Seja Bem-vindo(a) {{ request.user.first_name|default:request.user.username }}!</h2>
-    <div style="margin: 1.5rem 0; padding: 1rem; background-color: #033D60; color: white; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); font-size: 1.2rem; font-weight: bold;">
-    Sistema de Indicadores de Gestão - GAE-RJ
-</div>
+<div class="card" style="text-align:center;">
+  <h2>A Paz de Deus. Seja Bem-vindo(a) {{ request.user.first_name|default:request.user.username }}!</h2>
 
-   <div style="margin-top: 2rem;">
-  {% if can_admin %}
-  <a href="{% url 'confirmar_sigilo' %}"><button style="margin:0.5rem;">📊 Dashboard Administrativo</button></a>
-  {% endif %}
+  <div style="margin:1.5rem 0; padding:1rem; background-color:#033D60; color:#fff; border-radius:8px; box-shadow:0 0 8px rgba(0,0,0,0.2); font-size:1.2rem; font-weight:bold;">
+    Sistema de Indicadores de Gestão - RJ
+  </div>
 
-  {% if can_musical %}
-  <a href="{% url 'confirmar_sigilo_musical' %}"><button style="margin:0.5rem;">🎼 Dashboard Musical</button></a>
-  {% endif %}
+  <div style="margin-top:2rem;">
+    <!-- BIs públicos -->
+    <a href="{% url 'bi_ebi' %}"><button style="margin:0.5rem;">🧒 EBI</button></a>
+    <a href="{% url 'bi_visitas' %}"><button style="margin:0.5rem;">📋 DARPE e Visitas</button></a>
+    <a href="{% url 'bi_musical' %}"><button style="margin:0.5rem;">🎼 Musical</button></a>
+    <a href="{% url 'bi_mocidade' %}"><button style="margin:0.5rem;">👥 Mocidade</button></a>
 
-  {% if can_mocidade %}
-  <a href="{% url 'confirmar_sigilo_mocidade' %}"><button style="margin:0.5rem;">👥 Dashboard Mocidade</button></a>
-  {% endif %}
+    <!-- Outros -->
+    <a href="{% url 'mapas_regionais' %}"><button style="margin:0.5rem;">🗺️ Mapas Regionais</button></a>
 
-  {% if can_novo %}
-  <a href="{% url 'confirmar_sigilo_EBI' %}"><button style="margin:0.5rem;"> 🧒 Dashboard EBI</button></a>
-  {% endif %}
-
-  <a href="{% url 'mapas_regionais' %}"><button style="margin:0.5rem;">🗺️ Mapas Regionais</button></a>
-
-  {% if request.user.is_staff %}
-  <a href="/admin/" target="_blank"><button style="margin:0.5rem;">⚙️ Meus Controles (Admin)</button></a>
-  {% endif %}
-</div>
-
+    <!-- Administrativo (rota com login/confirmar sigilo) -->
+    {% if can_admin %}
+      <a href="{% url 'confirmar_sigilo' %}"><button style="margin:0.5rem;">📊 Dashboard Administrativo 🔒</button></a>
     {% endif %}
+
+    {% if request.user.is_staff %}
+      <a href="/admin/" target="_blank"><button style="margin:0.5rem;">⚙️ Meus Controles (Admin)</button></a>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}

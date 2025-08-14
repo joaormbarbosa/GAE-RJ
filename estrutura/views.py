@@ -1,101 +1,96 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.timezone import now
-from .models import RegistroAuditoria
-from django.contrib.auth import logout
-from django.shortcuts import redirect
 
+from .models import RegistroAuditoria
+
+
+# =========================
 # HOME
+# =========================
 @login_required
 def home(request):
-    u = request.user
     return render(request, 'home.html')
+
 
 @login_required
 def logout_view(request):
     logout(request)
     return redirect('https://gae-rj-v-2.onrender.com/')
 
-# ADMINISTRATIVO
-# ---------------------------
+
+# =========================
+# ADMINISTRATIVO  (único protegido)
+# =========================
 @login_required
 def confirmar_sigilo(request):
     if request.method == 'POST':
         return redirect('bi_administrativo')
     return render(request, 'confirmar_sigilo.html')
 
+
 @login_required
 def bi_administrativo(request):
     contexto = {
-        'username': request.user.username,
+        'username': request.user.get_username(),
         'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
     }
     return render(request, 'bi.html', contexto)
 
-# ---------------------------
-# MOCIDADE
-# ---------------------------
-@login_required
-def confirmar_sigilo_mocidade(request):
-    if request.method == 'POST':
-        return redirect('bi_mocidade')
-    return render(request, 'confirmar_sigilo_mocidade.html')
 
-@login_required
-def bi_mocidade(request):
+# =========================
+# BIs PÚBLICOS  (sem login_required)
+# =========================
+def bi_ebi(request):
     contexto = {
-        'username': request.user.username,
+        'username': request.user.get_username() if request.user.is_authenticated else 'Visitante',
         'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
     }
-    return render(request, 'bi_mocidade.html', contexto)
+    # Mantive o template que você já usa:
+    return render(request, 'bi_EBI.html', contexto)
 
-# ---------------------------
-# MUSICAL
-# ---------------------------
-@login_required
-def confirmar_sigilo_musical(request):
-    if request.method == 'POST':
-        return redirect('bi_musical')
-    return render(request, 'confirmar_sigilo_musical.html')
 
-@login_required
+def bi_visitas(request):
+    contexto = {
+        'username': request.user.get_username() if request.user.is_authenticated else 'Visitante',
+        'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
+    }
+    return render(request, 'bi_visitas.html', contexto)
+
+
 def bi_musical(request):
     contexto = {
-        'username': request.user.username,
+        'username': request.user.get_username() if request.user.is_authenticated else 'Visitante',
         'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
     }
     return render(request, 'bi_musical.html', contexto)
 
-# ---------------------------
-# EBI (novo)
-# ---------------------------
-@login_required
-def confirmar_sigilo_EBI(request):
-    if request.method == 'POST':
-        return redirect('bi_EBI')
-    return render(request, 'confirmar_sigilo_EBI.html')
 
-@login_required
-def bi_EBI(request):
+def bi_mocidade(request):
     contexto = {
-        'username': request.user.username,
+        'username': request.user.get_username() if request.user.is_authenticated else 'Visitante',
         'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
     }
-    return render(request, 'bi_EBI.html', contexto)
+    return render(request, 'bi_mocidade.html', contexto)
 
-# ---------------------------
+
+# =========================
 # AUDITORIA
-# ---------------------------
+# =========================
 @login_required
 def auditoria_log(request):
     RegistroAuditoria.objects.create(
         usuario=request.user,
-        acao="Copiou conteúdo com Ctrl+C"
+        acao="Copiou conteúdo com Ctrl+C",
     )
     return JsonResponse({'status': 'registrado'})
 
-# MAPAS REGIONAIS (Agora com login_required)
+
+# =========================
+# MAPAS REGIONAIS  (segue com login)
+# =========================
 @login_required
 def mapas_regionais(request):
     mapas = [

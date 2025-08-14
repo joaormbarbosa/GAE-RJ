@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}SIG - GAE-RJ{% endblock %}</title>
+    <title>{% block title %}Sistema de Indicadores de Gestão - RJ{% endblock %}</title>
     <style>
         body {
             font-family: Verdana, sans-serif;
@@ -101,7 +101,7 @@
 
 <header>
     <div class="logo-title">
-        <strong>SIG - GAE-RJ</strong>
+        <strong>SIG - RJ</strong>
     </div>
     <div class="auth-links">
         <a href="{% url 'home' %}">🏠 Início</a>
@@ -115,10 +115,6 @@
 </header>
 
 <!-- NOVO MENU -->
-<nav>
-    <a href="{% url 'mapas_regionais' %}">🗺️ Mapas Regionais</a>
-</nav>
-
 <main>
     {% block content %}{% endblock %}
 </main>
