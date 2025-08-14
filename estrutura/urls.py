@@ -19,14 +19,14 @@ urlpatterns = [
     # Outros
     path('auditoria-log/', views.auditoria_log, name='auditoria_log'),
     path('mapas-regionais/', views.mapas_regionais, name='mapas_regionais'),
-    
+
     # Formulários (página de links)
     path('formularios/', views.formularios, name='formularios'),
 
     # Auth
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     # (se ainda não tiver em outro arquivo)
-    # path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
 
     path('healthz/', views.healthz, name='healthz'),
     

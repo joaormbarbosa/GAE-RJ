@@ -11,7 +11,7 @@ from .models import RegistroAuditoria
 # =========================
 # HOME
 # =========================
-@login_required
+
 def home(request):
     return render(request, 'home.html')
 
@@ -90,9 +90,9 @@ def auditoria_log(request):
 
 
 # =========================
-# MAPAS REGIONAIS  (segue com login)
+# MAPAS REGIONAIS  
 # =========================
-@login_required
+
 def mapas_regionais(request):
     mapas = [
         {'nome': 'Angra dos Reis', 'url': 'https://umap.openstreetmap.fr/pt-br/map/regional-angra-dos-reis_1076926'},
