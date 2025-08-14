@@ -146,7 +146,7 @@ def formularios(request):
         },
         {
             "nome": "Mocidade - RJM's - Recitativos",
-            "descricao": "Coleta de informações dos eventos da mocidade.",
+            "descricao": "Coleta de informações dos recitativos das RJM's.",
             "url": "https://docs.google.com/forms/d/e/1FAIpQLSc_GW_A1POnojKTvn6LAcY-yNCRT_Mq8Msmpt3ztobgaIYN8A/viewform "
         },
         {
