@@ -145,9 +145,9 @@ def formularios(request):
             "url": "https://forms.cloud.microsoft/r/c19TBeCgYj"
         },
         {
-            "nome": "Mocidade - RJM's",
+            "nome": "Mocidade - RJM's - Recitativos",
             "descricao": "Coleta de informações dos eventos da mocidade.",
-            "url": "Em construção"
+            "url": "https://docs.google.com/forms/d/e/1FAIpQLSc_GW_A1POnojKTvn6LAcY-yNCRT_Mq8Msmpt3ztobgaIYN8A/viewform "
         },
         {
             "nome": "Mocidade - Eventos",
