@@ -153,7 +153,7 @@ def formularios(request):
         {
             "nome": "Mocidade - Eventos",
             "descricao": "Informações dos eventos da mocidade.",
-            "url": "https://docs.google.com/forms/d/e/SEU_FORM_ID/viewform",
+            "url": "https://docs.google.com/forms/d/e/1FAIpQLSetUtEGTnmaDuIFt82iI7ortzM0ki7RAqeUan9kSCWv7i7Vfw/viewform",
         },
     ]
     return render(request, "formularios.html", {"formularios": formularios})
