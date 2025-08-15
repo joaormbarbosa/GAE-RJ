@@ -119,7 +119,7 @@ def healthz(request):
     return HttpResponse("ok")
 
 def formularios(request):
-    itens = [
+    formularios = [
         {
             "nome": "EBI – RPC's",
             "descricao": "Envio de Informações sobre RPC's - EBI.",
@@ -142,13 +142,12 @@ def formularios(request):
         },
         {
             "nome": "Musical – Eventos",
-            "descricao": "Informações dos Eventos da Parte Musical",
+            "descricao": "Informações dos Eventos da Parte Musical.",
             "url": "https://forms.cloud.microsoft/r/c19TBeCgYj",
         },
         {
             "nome": "Mocidade - RJM's - Recitativos",
             "descricao": "Informações dos recitativos das RJM's.",
-            # pode ser forms.gle ou docs.google.com/forms
             "url": "https://docs.google.com/forms/d/e/1FAIpQLSc_GW_A1POnojKTvn6LAcY-yNCRT_Mq8Msmpt3ztobgaIYN8A/viewform",
         },
         {
@@ -157,26 +156,4 @@ def formularios(request):
             "url": "https://docs.google.com/forms/d/e/SEU_FORM_ID/viewform",
         },
     ]
-
-    def is_ms_forms(u: str) -> bool:
-        u = u.lower()
-        return ("forms.office.com" in u) or ("forms.microsoft.com" in u) or ("forms.cloud.microsoft" in u)
-
-    # Para cada item: sempre define open_url; só gera embed_url para Microsoft Forms.
-    for f in itens:
-        base = f["url"].strip()
-        f["open_url"] = base
-        f["embed_url"] = (base + ("&" if "?" in base else "?") + "embed=true") if is_ms_forms(base) else None
-
-    # Se vier um form (apenas MS Forms), exibe embutido
-    form_url = request.GET.get("form")
-    form_nome = next((i["nome"] for i in itens if i.get("embed_url") == form_url), None)
-    open_url = next((i["open_url"] for i in itens if i.get("embed_url") == form_url), None)
-
-    context = {
-        "formularios": itens,
-        "form_selecionado": form_url,
-        "form_nome": form_nome,
-        "form_open_url": open_url,
-    }
-    return render(request, "formularios.html", context)
+    return render(request, "formularios.html", {"formularios": formularios})
