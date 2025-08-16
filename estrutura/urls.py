@@ -23,10 +23,16 @@ urlpatterns = [
     # Formulários (página de links)
     path('formularios/', views.formularios, name='formularios'),
 
-    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html',redirect_authenticated_user=True,), name='login'),
+    # NOVO: página com 3 cards de sistemas externos
+    path('sistemas/', views.sistemas_externos, name='sistemas_externos'),
 
-    path('logout/', views.logout_view, name='logout'),  # nossa view de logout (GET)
+    # Auth
+    path('login/', auth_views.LoginView.as_view(
+        template_name='registration/login.html',
+        redirect_authenticated_user=True,
+    ), name='login'),
+    path('logout/', views.logout_view, name='logout'),
 
+    # Saúde
     path('healthz/', views.healthz, name='healthz'),
-    
 ]

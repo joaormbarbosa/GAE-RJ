@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 {% block title %}Sistema de Indicadores de Gestão - RJ{% endblock %}
 
 {% block content %}
@@ -20,8 +20,10 @@
     <a href="{% url 'mapas_regionais' %}"><button style="margin:0.5rem;">🗺️ Mapas Regionais</button></a>
     <a href="{% url 'formularios' %}"><button style="margin:0.5rem;">📝 Formulários</button></a>
 
+    <!-- NOVO: página com 3 cards (Ensaios, Adm Musical, Agenda Ministerial) -->
+    <a href="{% url 'sistemas_externos' %}"><button style="margin:0.5rem;">🔗 Sistemas Externos</button></a>
 
-    <!-- Administrativo (rota com login/confirmar sigilo) -->
+    <!-- Administrativo (protegido) -->
     {% if request.user.is_authenticated %}
       <a href="{% url 'confirmar_sigilo' %}"><button style="margin:0.5rem;">📊 Administrativo 🔒</button></a>
     {% endif %}
@@ -29,6 +31,8 @@
     {% if request.user.is_staff %}
       <a href="/admin/" target="_blank"><button style="margin:0.5rem;">⚙️ Meus Controles (Admin)</button></a>
     {% endif %}
+    
   </div>
 </div>
 {% endblock %}
+

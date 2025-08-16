@@ -1,10 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.utils.timezone import now
-from django.http import HttpResponse
-
 
 from .models import RegistroAuditoria
 
@@ -12,10 +10,8 @@ from .models import RegistroAuditoria
 # =========================
 # HOME
 # =========================
-
 def home(request):
     return render(request, 'home.html')
-
 
 
 def logout_view(request):
@@ -50,7 +46,6 @@ def bi_ebi(request):
         'username': request.user.get_username() if request.user.is_authenticated else 'Visitante',
         'data_hora': now().strftime('%d/%m/%Y %H:%M:%S'),
     }
-    # Mantive o template que você já usa:
     return render(request, 'bi_EBI.html', contexto)
 
 
@@ -91,9 +86,8 @@ def auditoria_log(request):
 
 
 # =========================
-# MAPAS REGIONAIS  
+# MAPAS REGIONAIS
 # =========================
-
 def mapas_regionais(request):
     mapas = [
         {'nome': 'Angra dos Reis', 'url': 'https://umap.openstreetmap.fr/pt-br/map/regional-angra-dos-reis_1076926'},
@@ -115,9 +109,14 @@ def mapas_regionais(request):
     }
     return render(request, "mapas_regionais.html", context)
 
+
 def healthz(request):
     return HttpResponse("ok")
 
+
+# =========================
+# FORMULÁRIOS (cards que abrem em nova aba)
+# =========================
 def formularios(request):
     formularios = [
         {
@@ -157,3 +156,27 @@ def formularios(request):
         },
     ]
     return render(request, "formularios.html", {"formularios": formularios})
+
+
+# =========================
+# SISTEMAS EXTERNOS (3 cards -> nova aba)
+# =========================
+def sistemas_externos(request):
+    sistemas = [
+        {
+            "nome": "Ensaios RJ",
+            "descricao": "Acesso ao sistema de ensaios do RJ.",
+            "url": "https://ensaiosccbrj.web.app",
+        },
+        {
+            "nome": "Administração Musical",
+            "descricao": "Portal de administração musical.",
+            "url": "https://musical.congregacao.org.br/autenticar",
+        },
+        {
+            "nome": "Regional Rio (VBWeb)",
+            "descricao": "Sistema Regional Rio (VBWeb).",
+            "url": "https://regionalrio.vbweb.com.br/Account/Login?ReturnUrl=%2F",
+        },
+    ]
+    return render(request, "sistemas_externos.html", {"sistemas": sistemas})
