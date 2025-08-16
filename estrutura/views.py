@@ -165,17 +165,17 @@ def sistemas_externos(request):
     sistemas = [
         {
             "nome": "Ensaios RJ",
-            "descricao": "Acesso ao sistema de ensaios do RJ.",
+            "descricao": "Acesso a Agenda de ensaios do RJ.",
             "url": "https://ensaiosccbrj.web.app",
         },
         {
-            "nome": "Administração Musical",
-            "descricao": "Portal de administração musical.",
+            "nome": "SAM - Sistema de Administração Musical",
+            "descricao": "Clique para acesso ao SAM - Sistema de Amdinistração Musical",
             "url": "https://musical.congregacao.org.br/autenticar",
         },
         {
-            "nome": "Regional Rio (VBWeb)",
-            "descricao": "Sistema Regional Rio (VBWeb).",
+            "nome": "Agenda Ministerial - RJ",
+            "descricao": "Clique para acesso a Agenda Ministerial do Estado Rio de Janeiro.",
             "url": "https://regionalrio.vbweb.com.br/Account/Login?ReturnUrl=%2F",
         },
     ]
