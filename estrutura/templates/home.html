@@ -20,10 +20,18 @@
     <a href="{% url 'mapas_regionais' %}"><button style="margin:0.5rem;">🗺️ Mapas Regionais</button></a>
     <a href="{% url 'formularios' %}"><button style="margin:0.5rem;">📝 Formulários</button></a>
 
-    <!-- NOVO: página com 3 cards (Ensaios, Adm Musical, Agenda Ministerial) -->
-    <a href="{% url 'sistemas_externos' %}"><button style="margin:0.5rem;">🔗 Sistemas Externos</button></a>
+    <!-- NOVOS: links externos abrindo em nova aba -->
+    <a href="https://ensaiosccbrj.web.app" target="_blank" rel="noopener">
+      <button style="margin:0.5rem;">🎶 Ensaios RJ</button>
+    </a>
+    <a href="https://musical.congregacao.org.br/autenticar" target="_blank" rel="noopener">
+      <button style="margin:0.5rem;">🎛️SAM - Sistema de Administração Musical</button>
+    </a>
+    <a href="https://regionalrio.vbweb.com.br/Account/Login?ReturnUrl=%2F" target="_blank" rel="noopener">
+      <button style="margin:0.5rem;">🏢 Agenda Ministerial - RJ </button>
+    </a>
 
-    <!-- Administrativo (protegido) -->
+    <!-- Administrativo (rota com login/confirmar sigilo) -->
     {% if request.user.is_authenticated %}
       <a href="{% url 'confirmar_sigilo' %}"><button style="margin:0.5rem;">📊 Administrativo 🔒</button></a>
     {% endif %}
@@ -31,8 +39,6 @@
     {% if request.user.is_staff %}
       <a href="/admin/" target="_blank"><button style="margin:0.5rem;">⚙️ Meus Controles (Admin)</button></a>
     {% endif %}
-    
   </div>
 </div>
 {% endblock %}
-

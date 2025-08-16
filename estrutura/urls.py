@@ -23,9 +23,6 @@ urlpatterns = [
     # Formulários (página de links)
     path('formularios/', views.formularios, name='formularios'),
 
-    # NOVO: página com 3 cards de sistemas externos
-    path('sistemas/', views.sistemas_externos, name='sistemas_externos'),
-
     # Auth
     path('login/', auth_views.LoginView.as_view(
         template_name='registration/login.html',
