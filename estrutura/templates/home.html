@@ -21,16 +21,16 @@
     <a href="{% url 'formularios' %}"><button style="margin:0.5rem;">📝 Formulários</button></a>
 
     <!-- NOVOS: links externos abrindo em nova aba -->
+     <a href="https://regionalrio.vbweb.com.br/Account/Login?ReturnUrl=%2F" target="_blank" rel="noopener">
+      <button style="margin:0.5rem;">🏢 Agenda Ministerial - RJ </button>
+    </a>
     <a href="https://ensaiosccbrj.web.app" target="_blank" rel="noopener">
       <button style="margin:0.5rem;">🎶 Ensaios RJ</button>
     </a>
     <a href="https://musical.congregacao.org.br/autenticar" target="_blank" rel="noopener">
       <button style="margin:0.5rem;">🎛️SAM - Sistema de Administração Musical</button>
     </a>
-    <a href="https://regionalrio.vbweb.com.br/Account/Login?ReturnUrl=%2F" target="_blank" rel="noopener">
-      <button style="margin:0.5rem;">🏢 Agenda Ministerial - RJ </button>
-    </a>
-
+    
     <!-- Administrativo (rota com login/confirmar sigilo) -->
     {% if request.user.is_authenticated %}
       <a href="{% url 'confirmar_sigilo' %}"><button style="margin:0.5rem;">📊 Administrativo 🔒</button></a>
