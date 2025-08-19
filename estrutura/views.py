@@ -1,3 +1,4 @@
+import os  # <<--- IMPORTANTE
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
@@ -157,21 +158,24 @@ def formularios(request):
     ]
     return render(request, "formularios.html", {"formularios": formularios})
 
-from django.contrib.auth.decorators import login_required
 
+# =========================
+# GESTÃO DE FORMULÁRIOS (somente logado) – links de respostas
+# =========================
 @login_required
 def gestao_formularios(request):
-    """
-    Lista de links de RESPOSTAS/ANÁLISES dos formulários.
-    Os links vêm de variáveis de ambiente para não expor tokens no repositório.
-    """
+    """Links de RESPOSTAS/ANÁLISES dos formulários (lidos de variáveis de ambiente)."""
+    def env_url(key, default=""):
+        return (os.environ.get(key) or default).strip()
+
     itens = [
         # EBI
         {
             "area": "EBI",
             "nome": "EBI – RPC's (respostas)",
             "tipo": "Microsoft Forms",
-            "url": os.environ.get("RESP_EBI_RPCS_URL", "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&FormId=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUOEtKRE0zUTBUWDdVTE9NRzhXUlZZNUY5Si4u&Token=fea2214db4e5479caeb785e1ac225893 "),
+            "url": env_url("RESP_EBI_RPCS_URL",
+                           "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&FormId=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUOEtKRE0zUTBUWDdVTE9NRzhXUlZZNUY5Si4u&Token=fea2214db4e5479caeb785e1ac225893"),
         },
 
         # DARPE e Visitas
@@ -179,13 +183,15 @@ def gestao_formularios(request):
             "area": "DARPE e Visitas",
             "nome": "Pedidos de Visitas (respostas)",
             "tipo": "Microsoft Forms",
-            "url": os.environ.get("RESP_VISITAS_PEDIDOS_URL", "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&FormId=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUMERSSTcyNUczUDhJTElTM0tBQkdKOUlQNC4u&Token=56a513996190410da5f23dddbfc697f2 "),
+            "url": env_url("RESP_VISITAS_PEDIDOS_URL",
+                           "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&FormId=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUMERSSTcyNUczUDhJTElTM0tBQkdKOUlQNC4u&Token=56a513996190410da5f23dddbfc697f2"),
         },
         {
             "area": "DARPE e Visitas",
             "nome": "Visitas Realizadas (respostas)",
             "tipo": "Microsoft Forms",
-            "url": os.environ.get("RESP_VISITAS_REALIZADAS_URL", "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&FormId=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUMlhDMkRGMjlCODBHU1Y2UTlQWjZIUVcxQi4u&Token=e09abb059d8e48c8a6be7dbf977af5e6 "),
+            "url": env_url("RESP_VISITAS_REALIZADAS_URL",
+                           "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&FormId=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUMlhDMkRGMjlCODBHU1Y2UTlQWjZIUVcxQi4u&Token=e09abb059d8e48c8a6be7dbf977af5e6"),
         },
 
         # Musical
@@ -193,13 +199,15 @@ def gestao_formularios(request):
             "area": "Musical",
             "nome": "Musical – GEM (respostas)",
             "tipo": "Microsoft Forms",
-            "url": os.environ.get("RESP_MUSICAL_GEM_URL", "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&token=429fa57ed48a440090a6351c454c6e8e&id=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUNjU1UUdKSFFTQjY2VEdFRkFSMUdHNDlDTi4u"),
+            "url": env_url("RESP_MUSICAL_GEM_URL",
+                           "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&token=429fa57ed48a440090a6351c454c6e8e&id=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUNjU1UUdKSFFTQjY2VEdFRkFSMUdHNDlDTi4u"),
         },
         {
             "area": "Musical",
             "nome": "Musical – Eventos (respostas)",
             "tipo": "Microsoft Forms",
-            "url": os.environ.get("RESP_MUSICAL_EVENTOS_URL", "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&FormId=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUMjIwR05OQkVWQ0VNUFNLRDdDV05TMlpGTS4u&Token=8e13be9f0708485aa5453deb15ea3db7 "),
+            "url": env_url("RESP_MUSICAL_EVENTOS_URL",
+                           "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&FormId=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUMjIwR05OQkVWQ0VNUFNLRDdDV05TMlpGTS4u&Token=8e13be9f0708485aa5453deb15ea3db7"),
         },
 
         # Mocidade (Google Forms)
@@ -207,17 +215,15 @@ def gestao_formularios(request):
             "area": "Mocidade",
             "nome": "RJM's - Recitativos (respostas)",
             "tipo": "Google Forms",
-            "url": os.environ.get("RESP_MOCIDADE_RJMS_URL", ""),
+            "url": env_url("RESP_MOCIDADE_RJMS_URL", ""),
         },
         {
             "area": "Mocidade",
             "nome": "Mocidade - Eventos (respostas)",
             "tipo": "Google Forms",
-            "url": os.environ.get("RESP_MOCIDADE_EVENTOS_URL", ""),
+            "url": env_url("RESP_MOCIDADE_EVENTOS_URL", ""),
         },
     ]
 
-    # Mostra só os que têm URL configurada
     itens = [i for i in itens if i["url"]]
-
     return render(request, "gestao_formularios.html", {"itens": itens})
