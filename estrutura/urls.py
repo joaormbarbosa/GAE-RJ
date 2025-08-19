@@ -22,6 +22,8 @@ urlpatterns = [
 
     # Formulários (página de links)
     path('formularios/', views.formularios, name='formularios'),
+    path('gestao-formularios/', views.gestao_formularios, name='gestao_formularios'),
+
 
     # Auth
     path('login/', auth_views.LoginView.as_view(
