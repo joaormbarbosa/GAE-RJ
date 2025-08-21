@@ -191,7 +191,14 @@ def gestao_formularios(request):
             "nome": "Visitas Realizadas (respostas)",
             "tipo": "Microsoft Forms",
             "url": env_url("RESP_VISITAS_REALIZADAS_URL",
-                           "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&FormId=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUMlhDMkRGMjlCODBHU1Y2UTlQWjZIUVcxQi4u&Token=e09abb059d8e48c8a6be7dbf977af5e6"),
+                           "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&token=69c5a461d86541b5b81d1a4d06de4637&id=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUNEU1UzBZV0kyNFJZTzlBRE0yNlBQVDM2Ry4u"),
+        },
+          {
+            "area": "DARPE e Visitas",
+            "nome": "Salas de Orações  (Não oficializadas)",
+            "tipo": "Microsoft Forms",
+            "url": env_url("RESP_SALAS_DE_ORAÇÕES_URL",
+                           "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&token=e09abb059d8e48c8a6be7dbf977af5e6&id=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUMlhDMkRGMjlCODBHU1Y2UTlQWjZIUVcxQi4u"),
         },
 
         # Musical
