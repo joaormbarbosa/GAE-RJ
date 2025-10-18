@@ -125,6 +125,18 @@ def formularios(request):
             "descricao": "Envio de Informações sobre RPC's - EBI.",
             "url": "https://forms.cloud.microsoft/r/JmQeKR6yCS",
         },
+        {   "nome": "Grupo Gestor Construções - CEPI",
+            "descrição": "CEPI - Solicitações de apoio as construções e reformas",
+             "url": "https://forms.office.com/r/dzuDgCtzfN?embed=true",
+        },
+        {   "nome": "GAE - Engenharia",
+            "descrição": "GAE - Solicitações de Manutenção",
+             "url": "https://forms.office.com/r/u513u0SXTW",
+        },
+        {   "nome": "CAE - Conselho dos Anciães do Estado - RJ",
+            "descrição": "CAE - Solicitações ao Conselho dos Anciães",
+             "url": "https://forms.office.com/r/Gj1GtpX8ZG",
+        },
         {
             "nome": "Pedidos de Visitas",
             "descricao": "Envio de pedidos de visitas.",
@@ -201,10 +213,35 @@ def gestao_formularios(request):
                            "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&token=e09abb059d8e48c8a6be7dbf977af5e6&id=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUMlhDMkRGMjlCODBHU1Y2UTlQWjZIUVcxQi4u"),
         },
 
+        # Grupo Gestor Construções - CEPI
+        {
+            "area": "Grupo Gestor Construções - CEPI",
+            "nome": "CEPI - Solicitações de apoio as construções e reformas",
+            "tipo": "Microsoft Forms",
+            "url": env_url("Pedido a CEPI", "https://forms.office.com/Pages/DesignPageV2.aspx?subpage=design&token=e96014b2b7134ba68054c4e71f8596f5&id=f1bn8KykVUe3ClwD-hDjDNSiuJZxpZNNutPXoTAFR4VUNlRBU0QwUzRHSzJSVDFOQVpLRUoxNVpTUS4u"),
+        }
+
+        # GAE - Engenharia
+        ,
+        {
+            "area": "GAE - Engenharia",
+            "nome": "GAE - Solicitações de Manutenção",
+            "tipo": "Microsoft Forms",
+            "url": env_url("Análise de Construções e Reformas",
+                           "https://forms.office.com/Pages/DesignPageV2.aspx?subpage=design&token=0dd361b1b5ee429ea7b0dfcfbcb5d0a3&id=f1bn8KykVUe3ClwD-hDjDNSiuJZxpZNNutPXoTAFR4VUQTk5WFlWN05ZQkNGNFlBSFpTSEpLV1dTSC4u"),
+        }
+
         # Musical
         {
             "area": "Musical",
             "nome": "Musical – GEM (respostas)",
+            "tipo": "Microsoft Forms",
+            "url": env_url("RESP_MUSICAL_GEM_URL",
+                           "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&token=429fa57ed48a440090a6351c454c6e8e&id=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUNjU1UUdKSFFTQjY2VEdFRkFSMUdHNDlDTi4u"),
+        },
+        {
+            "area": "Musical",
+            "nome": "Musical – GEM (FIXOS) (respostas)",
             "tipo": "Microsoft Forms",
             "url": env_url("RESP_MUSICAL_GEM_URL",
                            "https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&token=429fa57ed48a440090a6351c454c6e8e&id=f1bn8KykVUe3ClwD-hDjDB5owopPcwlMmxAga3IXoaZUNjU1UUdKSFFTQjY2VEdFRkFSMUdHNDlDTi4u"),
