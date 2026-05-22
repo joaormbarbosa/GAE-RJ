@@ -1,86 +1,86 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block title %}Sistema de Indicadores de Gestão - RJ{% endblock %}
 
 {% block content %}
-<div class="card" style="text-align:center;">
-  <h2>A Paz de Deus. Seja Bem-vindo(a) {{ request.user.first_name|default:request.user.username }}!</h2>
-
-  <div style="margin:1.5rem 0; padding:1rem; background-color:#033D60; color:#fff; border-radius:8px; box-shadow:0 0 8px rgba(0,0,0,0.2); font-size:1.2rem; font-weight:bold;">
-    Sistema de Indicadores de Gestão - RJ
+<section class="home-hero">
+  <div>
+    <p class="eyebrow">Congregação Cristã no Brasil</p>
+    <h1>A Paz de Deus. Seja bem-vindo(a), {{ request.user.first_name|default:request.user.username }}.</h1>
+    <p class="home-hero__copy">
+      Acompanhe indicadores, formulários, mapas regionais e acessos de apoio em um ambiente único para o GAE-RJ.
+    </p>
   </div>
+  <div class="home-hero__panel" aria-label="Identificação do sistema">
+    <span>SIG - RJ</span>
+    <strong>Sistema de Indicadores de Gestão</strong>
+  </div>
+</section>
 
-  {# estilos leves para as seções #}
-  <style>
-    .secao { text-align:left; margin: 1.25rem auto 1.75rem; max-width: 980px; }
-    .secao h3 { margin:.25rem 0 .75rem; color:#033D60; }
-    .grade { display:flex; flex-wrap:wrap; gap:.5rem; }
-    .grade a[aria-disabled="true"] button { opacity:.5; cursor:not-allowed; }
-    .grade button { margin:0.25rem 0.5rem 0.25rem 0; }
-  </style>
-
-  <!-- DARPE e Visitas -->
-  <div class="secao">
-    <h3>📋 DARPE e Visitas</h3>
-    <div class="grade">
-      <a href="{% url 'bi_visitas' %}"><button>📊 BI DARPE e Visitas</button></a>
+<section class="workspace-grid" aria-label="Áreas do sistema">
+  <article class="workspace-card">
+    <div class="workspace-card__head">
+      <span class="workspace-card__kicker">Indicadores</span>
+      <h2>DARPE e Visitas</h2>
     </div>
-  </div>
+    <a class="action-button" href="{% url 'bi_visitas' %}">BI DARPE e Visitas</a>
+  </article>
 
-  <!-- EBI -->
-  <div class="secao">
-    <h3>🧒 EBI</h3>
-    <div class="grade">
-      <a href="{% url 'bi_ebi' %}"><button>📊 BI EBI</button></a>
+  <article class="workspace-card">
+    <div class="workspace-card__head">
+      <span class="workspace-card__kicker">Indicadores</span>
+      <h2>EBI</h2>
     </div>
-  </div>
+    <a class="action-button" href="{% url 'bi_ebi' %}">BI EBI</a>
+  </article>
 
- <!-- Formulários -->
-  <div class="secao">
-    <h3>📝 Formulários</h3>
-    <div class="grade">
-      <a href="{% url 'formularios' %}"><button>📬 Formulários</button></a>
+  <article class="workspace-card">
+    <div class="workspace-card__head">
+      <span class="workspace-card__kicker">Coleta e respostas</span>
+      <h2>Formulários</h2>
+    </div>
+    <div class="action-stack">
+      <a class="action-button" href="{% url 'formularios' %}">Abrir formulários</a>
       {% if request.user.is_authenticated %}
-  <a href="{% url 'gestao_formularios' %}"><button>📁 Gestão de Formulários 🔒</button></a>
+        <a class="action-button action-button--secondary" href="{% url 'gestao_formularios' %}">Gestão de formulários</a>
       {% endif %}
     </div>
-  </div>
+  </article>
 
-  <!-- Ministério -->
-  <div class="secao">
-    <h3>📊 Ministério</h3>
-    <div class="grade">
-      <a href="https://regionaldc.vbweb.com.br/" target="_blank" rel="noopener noreferrer">
-        <button>🗓️ Agenda Ministerial</button>
-      </a>
-      <a href="{% url 'mapas_regionais' %}"><button>🗺️ Mapas Regionais</button></a>
-
+  <article class="workspace-card">
+    <div class="workspace-card__head">
+      <span class="workspace-card__kicker">Apoio regional</span>
+      <h2>Ministério</h2>
+    </div>
+    <div class="action-stack">
+      <a class="action-button" href="https://regionaldc.vbweb.com.br/" target="_blank" rel="noopener noreferrer">Agenda ministerial</a>
+      <a class="action-button action-button--secondary" href="{% url 'mapas_regionais' %}">Mapas regionais</a>
       {% if request.user.is_authenticated %}
-        <a href="{% url 'confirmar_sigilo' %}"><button>📊 Administrativo 🔒</button></a>
+        <a class="action-button action-button--secondary" href="{% url 'confirmar_sigilo' %}">Administrativo</a>
       {% endif %}
       {% if request.user.is_staff %}
-        <a href="/admin/" target="_blank" rel="noopener noreferrer"><button>⚙️ Meus Controles (Admin)</button></a>
+        <a class="action-button action-button--secondary" href="/admin/" target="_blank" rel="noopener noreferrer">Meus controles</a>
       {% endif %}
     </div>
-  </div>
+  </article>
 
-<!-- 📊 Mocidade -->
-<div style="margin-top:1.5rem; text-align:left;">
-  <h3 style="margin:0 0 .6rem 0; text-align:left;">📊 Mocidade</h3>
-  <a href="{% url 'bi_mocidade' %}">
-    <button style="margin:0.5rem;">📊 BI Mocidade</button>
-  </a>
-</div>
-
- <!-- Musical -->
-  <div class="secao">
-    <h3>🎵 Musical</h3>
-    <div class="grade">
-      <a href="{% url 'bi_musical' %}"><button>📊 BI Musical</button></a>
-      <a href="https://musical.congregacao.org.br/autenticar" target="_blank" rel="noopener noreferrer"><button>🎛️ SAM</button></a>
-      <a href="https://ensaiosccbrj.web.app" target="_blank" rel="noopener noreferrer"><button>🎶 Ensaios RJ</button></a>
+  <article class="workspace-card">
+    <div class="workspace-card__head">
+      <span class="workspace-card__kicker">Indicadores</span>
+      <h2>Mocidade</h2>
     </div>
-  </div>
+    <a class="action-button" href="{% url 'bi_mocidade' %}">BI Mocidade</a>
+  </article>
 
-
-</div>
+  <article class="workspace-card">
+    <div class="workspace-card__head">
+      <span class="workspace-card__kicker">Apoio musical</span>
+      <h2>Musical</h2>
+    </div>
+    <div class="action-stack">
+      <a class="action-button" href="{% url 'bi_musical' %}">BI Musical</a>
+      <a class="action-button action-button--secondary" href="https://musical.congregacao.org.br/autenticar" target="_blank" rel="noopener noreferrer">SAM</a>
+      <a class="action-button action-button--secondary" href="https://ensaiosccbrj.web.app" target="_blank" rel="noopener noreferrer">Ensaios RJ</a>
+    </div>
+  </article>
+</section>
 {% endblock %}

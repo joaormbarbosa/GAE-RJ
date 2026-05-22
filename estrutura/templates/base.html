@@ -5,120 +5,35 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Sistema de Indicadores de Gestão - RJ{% endblock %}</title>
-    <style>
-        body {
-            font-family: Verdana, sans-serif;
-            background-color: #F5F7FA;
-            margin: 0;
-            padding: 0;
-            color: #201E1E;
-        }
-
-        header {
-            background-color: #033D60;
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo-title {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-title img {
-            height: 40px;
-        }
-
-        .auth-links a {
-            margin-left: 1rem;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        nav {
-            background-color: #E6EDF4;
-            padding: 0.5rem 2rem;
-        }
-
-        nav a {
-            margin-right: 1.5rem;
-            color: #033D60;
-            font-weight: bold;
-            font-size: 0.95rem;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        main {
-            padding: 2rem;
-        }
-
-        a {
-            color: #033D60;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .card {
-            background-color: #FFFFFF;
-            border: 1px solid #CDD4DC;
-            border-radius: 6px;
-            padding: 1.5rem;
-            max-width: 700px;
-            margin: 2rem auto;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-        }
-
-        button {
-            background-color: #033D60;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        button:hover {
-            background-color: #022d49;
-        }
-
-        .top-return {
-            margin-bottom: 1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
 </head>
 <body>
 
-<header>
-    <div class="logo-title">
-        <strong>SIG - RJ</strong>
-    </div>
-    <div class="auth-links">
-    {% if request.user.is_authenticated %}
-    <!-- itens para logado -->
-        <a href="{% url 'home' %}">🏠 Início</a>
-        <a href="{% url 'password_change' %}">🔒 Alterar senha</a>
-        <a href="{% url 'logout' %}">🚪 Sair</a>
-    {% else %}
-    <!-- itens para visitante -->
-        <a href="{% url 'home' %}">🏠 Início</a>
-        <a href="{% url 'login' %}">🔑 Entrar</a>
-    {% endif %}
+<header class="app-header">
+    <div class="app-header__inner">
+        <a class="brand" href="{% url 'home' %}" aria-label="Página inicial">
+            <img class="brand__logo" src="{% static 'logo_gae_rj.png' %}" alt="GAE-RJ">
+            <span class="brand__text">
+                <strong>SIG - RJ</strong>
+                <small>Sistema de Indicadores de Gestão</small>
+            </span>
+        </a>
+
+        <nav class="auth-links" aria-label="Navegação principal">
+            <a href="{% url 'home' %}">Início</a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'password_change' %}">Alterar senha</a>
+                <a href="{% url 'logout' %}">Sair</a>
+            {% else %}
+                <a href="{% url 'login' %}">Entrar</a>
+            {% endif %}
+        </nav>
     </div>
 </header>
 
-<!-- NOVO MENU -->
-<main>
+<main class="app-main">
     {% block content %}{% endblock %}
 </main>
 
