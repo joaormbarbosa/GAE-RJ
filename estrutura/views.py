@@ -2,10 +2,43 @@ import os  # <<--- IMPORTANTE
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponse
+from django.http import Http404, JsonResponse, HttpResponse
 from django.utils.timezone import now
 
 from .models import RegistroAuditoria
+
+
+BI_EMBED_URLS = {
+    "administrativo": os.environ.get(
+        "BI_ADMINISTRATIVO_URL",
+        "https://app.powerbi.com/view?r=eyJrIjoiOTNmYTdjZWEtMWQ2My00NDM3LThmOTItNjJhMjEzOWRmOWEzIiwidCI6ImNmMzE3Y2ViLTA1M2EtNDYyMy04Y2RmLWU4NWM1NjgxNTdmOCJ9&pageName=4e5032f6e3956f37f488",
+    ).strip(),
+    "ebi": os.environ.get(
+        "BI_EBI_URL",
+        "https://app.powerbi.com/view?r=eyJrIjoiM2YyNDkxYmQtNWM1MC00Yjk4LWIyYTUtZWQ4M2I1ZWQ5MjIzIiwidCI6ImNmMzE3Y2ViLTA1M2EtNDYyMy04Y2RmLWU4NWM1NjgxNTdmOCJ9&pageName=a86d3d8e51a368371606",
+    ).strip(),
+    "visitas": os.environ.get(
+        "BI_VISITAS_URL",
+        "https://app.powerbi.com/view?r=eyJrIjoiZDJlZTRjOWMtZGE2ZS00MTZiLWExYjgtMzU5ZDJiOWMwYTYyIiwidCI6ImNmMzE3Y2ViLTA1M2EtNDYyMy04Y2RmLWU4NWM1NjgxNTdmOCJ9",
+    ).strip(),
+    "musical": os.environ.get(
+        "BI_MUSICAL_URL",
+        "https://app.powerbi.com/view?r=eyJrIjoiNTFhOWJjNTItZGE0Yi00ODZlLWE2MGYtNWY5OGI3NzI1NzIyIiwidCI6ImNmMzE3Y2ViLTA1M2EtNDYyMy04Y2RmLWU4NWM1NjgxNTdmOCJ9&pageName=c06e6e3fcc3d9d966a0d",
+    ).strip(),
+    "mocidade": os.environ.get(
+        "BI_MOCIDADE_URL",
+        "https://app.powerbi.com/view?r=eyJrIjoiNGQ4NzZiZDMtMTkxMC00YjViLTg3Y2YtYzhjZTJiMTMyOTU4IiwidCI6ImNmMzE3Y2ViLTA1M2EtNDYyMy04Y2RmLWU4NWM1NjgxNTdmOCJ9&pageName=0a811cfae06064695d34",
+    ).strip(),
+}
+
+
+def bi_embed(request, dashboard):
+    url = BI_EMBED_URLS.get(dashboard)
+    if not url:
+        raise Http404("Dashboard nao encontrado")
+    if dashboard == "administrativo" and not request.user.is_authenticated:
+        return redirect("login")
+    return redirect(url)
 
 
 # =========================

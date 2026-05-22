@@ -15,6 +15,7 @@ urlpatterns = [
     path('bi-visitas/', views.bi_visitas, name='bi_visitas'),
     path('bi-musical/', views.bi_musical, name='bi_musical'),
     path('bi-mocidade/', views.bi_mocidade, name='bi_mocidade'),
+    path('bi-embed/<slug:dashboard>/', views.bi_embed, name='bi_embed'),
 
     # Outros
     path('auditoria-log/', views.auditoria_log, name='auditoria_log'),
